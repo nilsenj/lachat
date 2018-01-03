@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, Inject, Input, OnInit} from '@angular/core';
 import {User} from "../../models/User";
 import {AuthenticationService} from "../../services/authentication.service";
+import {app} from "../../../config/app"
 
 @Component({
     selector: 'app-navigation',
@@ -12,14 +13,15 @@ export class NavigationComponent implements OnInit {
     @Input() userChange: any;
     @Input() user: User[] = [];
     authenticated: boolean = false;
+    app = {};
 
     public authService;
     constructor(authService: AuthenticationService) {
         this.authService = authService;
     }
 
-
     ngOnInit() {
+        this.app = app;
         this.getUser();
         this.userChange.subscribe(data => {
             if (data) {

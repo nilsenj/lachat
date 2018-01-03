@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {app} from "../../../config/app";
 
 @Component({
     selector: 'app-welcome',
@@ -7,7 +8,7 @@ import {Component, OnInit} from '@angular/core';
 })
 
 export class WelcomeComponent implements OnInit {
-    title = "App";
+    title = app.app_name;
 
     constructor() {
     }

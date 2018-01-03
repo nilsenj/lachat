@@ -4,15 +4,16 @@ import {LoginComponent} from "../../components/login/login.component";
 import {RouterModule, Routes} from "@angular/router";
 import {RegisterComponent} from "../../components/register/register.component";
 import {WelcomeComponent} from "../../components/welcome/welcome.component";
-import {HomeComponent} from "../../components/home/home.component";
 import {AuthGuard} from "../../guards/auth.guard";
 import {UserComponent} from "../../components/user/user.component";
+import {ChatComponent} from "../../components/chat/chat.component";
+import {RedirectIfLoggedInGuard} from "../../guards/redirect-if-logged-in.guard";
 
 const appRoutes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
-    {path: '', component: WelcomeComponent},
-    {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+    {path: '', component: WelcomeComponent, canActivate: [RedirectIfLoggedInGuard]},
+    {path: 'chat', component: ChatComponent, canActivate: [AuthGuard]},
     {path: 'user', component: UserComponent, canActivate: [AuthGuard]},
 
     // otherwise redirect to home
