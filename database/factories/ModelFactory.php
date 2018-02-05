@@ -22,3 +22,11 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+$factory->define(\App\Models\Thread::class, function (Faker\Generator $faker) {
+//    $authors =
+  return [
+    'subject' => '',
+    'author_id' => $faker->numberBetween(1,21)
+  ];
+});
+

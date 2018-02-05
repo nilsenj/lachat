@@ -21,6 +21,7 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
 import { ChatSidebarComponent } from './components/chat-sidebar/chat-sidebar.component';
 import { ChatContentComponent } from './components/chat-content/chat-content.component';
 import {RedirectIfLoggedInGuard} from "./guards/redirect-if-logged-in.guard";
+import { CreateMessageComponent } from './components/create-message/create-message.component';
 
 @NgModule({
     declarations: [
@@ -34,7 +35,8 @@ import {RedirectIfLoggedInGuard} from "./guards/redirect-if-logged-in.guard";
         MessageComponent,
         UserInfoComponent,
         ChatSidebarComponent,
-        ChatContentComponent
+        ChatContentComponent,
+        CreateMessageComponent
     ],
     imports: [
         BrowserModule,

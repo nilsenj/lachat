@@ -18,30 +18,39 @@ use Illuminate\Http\Request;
 //});
 
 Route::group(['middleware' => ['api'], 'as' => 'api.'], function () {
-    if(isset($_SERVER['HTTP_ORIGIN'])) {
-        $origin = !empty($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : "";
-    } else {
-        $origin = !empty($_SERVER['HTTP_HOST']) ? "http://" . $_SERVER['HTTP_HOST'] : "";
-    }
+  if (isset($_SERVER['HTTP_ORIGIN'])) {
+    $origin = !empty($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : "";
+  } else {
+    $origin = !empty($_SERVER['HTTP_HOST']) ? "http://" . $_SERVER['HTTP_HOST'] : "";
+  }
 
-    if ((\App::environment('local', 'staging') && ($origin == "http://localhost:4200"))
-        || $origin == env('CLIENT_URL')) {
-        // cors not working from middleware
-        header('Access-Control-Allow-Origin:  *');
-        header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PATCH, PUT, DELETE');
-        header('Access-Control-Allow-Headers:  Content-Type, X-Auth_old-Token, X-CSRF-Token, Origin, Authorization');
-    }
-    Route::post('/register', [
-        'uses' => 'Auth\AuthController@register',
+  if ((\App::environment('local', 'staging') && ($origin == "http://localhost:4200"))
+    || $origin == env('CLIENT_URL')) {
+    // cors not working from middleware
+    header('Access-Control-Allow-Origin:  *');
+    header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PATCH, PUT, DELETE');
+    header('Access-Control-Allow-Headers:  Content-Type, X-Auth_old-Token, X-CSRF-Token, Origin, Authorization');
+  }
+  Route::post('/register', [
+    'uses' => 'Auth\AuthController@register',
+  ]);
+
+  Route::post('/login', [
+    'uses' => 'Auth\AuthController@login',
+  ]);
+
+  Route::group(['middleware' => 'jwt.auth'], function () {
+    Route::get('/user', [
+      'uses' => 'UserController@index',
     ]);
-
-    Route::post('/login', [
-        'uses' => 'Auth\AuthController@login',
-    ]);
-
-    Route::group(['middleware' => 'jwt.auth'], function () {
-        Route::get('/user', [
-            'uses' => 'UserController@index',
-        ]);
+    Route::group(['prefix' => 'messages', 'as' => 'messages.'], function () {
+      Route::post('/openThread/{id}', [
+        'uses' => 'Api\MessagesController@openThread',
+        'as' => 'openThread'
+      ]);
     });
+    Route::resource('messages', 'Api\MessagesController', [
+      'only' => ['index', 'store', 'show']
+    ]);
+  });
 });
