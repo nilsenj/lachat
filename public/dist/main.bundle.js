@@ -197,12 +197,14 @@ var _a, _b, _c, _d;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_chat_sidebar_chat_sidebar_component__ = __webpack_require__("../../../../../src/app/components/chat-sidebar/chat-sidebar.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_chat_content_chat_content_component__ = __webpack_require__("../../../../../src/app/components/chat-content/chat-content.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__guards_redirect_if_logged_in_guard__ = __webpack_require__("../../../../../src/app/guards/redirect-if-logged-in.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_create_message_create_message_component__ = __webpack_require__("../../../../../src/app/components/create-message/create-message.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -244,7 +246,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_18__components_message_message_component__["a" /* MessageComponent */],
             __WEBPACK_IMPORTED_MODULE_19__components_user_info_user_info_component__["a" /* UserInfoComponent */],
             __WEBPACK_IMPORTED_MODULE_20__components_chat_sidebar_chat_sidebar_component__["a" /* ChatSidebarComponent */],
-            __WEBPACK_IMPORTED_MODULE_21__components_chat_content_chat_content_component__["a" /* ChatContentComponent */]
+            __WEBPACK_IMPORTED_MODULE_21__components_chat_content_chat_content_component__["a" /* ChatContentComponent */],
+            __WEBPACK_IMPORTED_MODULE_23__components_create_message_create_message_component__["a" /* CreateMessageComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["BrowserModule"],
@@ -449,6 +452,70 @@ ChatComponent = __decorate([
 ], ChatComponent);
 
 //# sourceMappingURL=C:/Users/nilse/Code/lachat/src/chat.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/create-message/create-message.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\r\n  create-message works!\r\n</p>\r\n<h1>Create a new message</h1>\r\n<form action=\"{{ storePath }}\" method=\"post\">\r\n  <div class=\"col-md-6\">\r\n\r\n    <!-- Message Form Input -->\r\n    <div class=\"form-group\">\r\n      <label class=\"control-label\">Message</label>\r\n      <textarea name=\"message\" class=\"form-control\"></textarea>\r\n    </div>\r\n    <!-- Submit Form Input -->\r\n    <div class=\"form-group\">\r\n      <button type=\"submit\" class=\"btn btn-primary form-control\">Submit</button>\r\n    </div>\r\n  </div>\r\n</form>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/create-message/create-message.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/create-message/create-message.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CreateMessageComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config_app__ = __webpack_require__("../../../../../src/config/app.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var CreateMessageComponent = (function () {
+    function CreateMessageComponent() {
+        this.storePath = __WEBPACK_IMPORTED_MODULE_1__config_app__["a" /* app */].api_url + '/api/messages/store';
+    }
+    CreateMessageComponent.prototype.ngOnInit = function () {
+    };
+    return CreateMessageComponent;
+}());
+CreateMessageComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-create-message',
+        template: __webpack_require__("../../../../../src/app/components/create-message/create-message.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/components/create-message/create-message.component.scss")]
+    }),
+    __metadata("design:paramtypes", [])
+], CreateMessageComponent);
+
+//# sourceMappingURL=C:/Users/nilse/Code/lachat/src/create-message.component.js.map
 
 /***/ }),
 
@@ -1482,7 +1549,7 @@ var CustomToastr = (function (_super) {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return app; });
 var app = {
-    api_url: 'http://lachat.local',
+    api_url: 'http://lachat.oo',
     app_name: 'LaChat'
 };
 //# sourceMappingURL=C:/Users/nilse/Code/lachat/src/app.js.map

@@ -18,14 +18,6 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 class MessagesController extends Controller
 {
   /**
-   * Just for testing - the user should be logged in. In a real
-   * app, please use standard authentication practices
-   */
-  public function __construct()
-  {
-  }
-
-  /**
    * Show all of the message threads to the user
    *
    * @return mixed
@@ -142,50 +134,4 @@ class MessagesController extends Controller
     }
     return redirect('messages/' . $id);
   }
-
-  /**
-   * Adds a new message to a current thread
-   *
-   * @param $id
-   * @return mixed
-   */
-  public function openThread(Request $request, $id)
-  {
-    try {
-      $thread = Thread::findOrFail($id);
-      $status = $request->get('status');
-    } catch (ModelNotFoundException $e) {
-      \Log::error('The thread with ID: ' .
-        $id . ' was not found. Code: ' . 404);
-      return response()->json(['error_message', 'The thread with ID: ' .
-        $id . ' was not found.'], 404);
-    }
-    $message = "";
-    $threadStatus = ThreadStatuses::where('thread_id', $thread->id);
-    if ($status == 'opened') {
-      $author = ($thread->author_id == $request->user()->id) ? 'You' :
-        User::find($thread->author_id)->roles->first()->name;
-      $message = $author . " opened contacts. " . $request->get('message');
-      $threadStatus->update(['status' => $status]);
-    }
-    if ($status == 'closed') {
-      $author = ($thread->author_id == $request->user()->id) ? 'You' :
-        User::find($thread->author_id)->roles->first()->name;
-      $message = $author . " closed thread." . Input::has('message') ? $request->get('message') : '';
-      $threadStatus->update(['status' => $status]);
-    }
-    if (!$status) {
-      return response()->json(['error_message' => 'Please provide status'], 422);
-    }
-    // Message
-    Message::create(
-      [
-        'thread_id' => $thread->id,
-        'user_id' => $request->user()->id,
-        'body' => $message
-      ]
-    );
-    return response()->json(['message', 'The thread opened'], 200);
-  }
-
 }
