@@ -198,12 +198,22 @@ var _a, _b, _c, _d;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_chat_content_chat_content_component__ = __webpack_require__("../../../../../src/app/components/chat-content/chat-content.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__guards_redirect_if_logged_in_guard__ = __webpack_require__("../../../../../src/app/guards/redirect-if-logged-in.guard.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_create_message_create_message_component__ = __webpack_require__("../../../../../src/app/components/create-message/create-message.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_company_company_component__ = __webpack_require__("../../../../../src/app/components/company/company.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__services_company_service__ = __webpack_require__("../../../../../src/app/services/company.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__services_thread_service__ = __webpack_require__("../../../../../src/app/services/thread.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_company_thread_company_thread_component__ = __webpack_require__("../../../../../src/app/components/company-thread/company-thread.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_thread_thread_component__ = __webpack_require__("../../../../../src/app/components/thread/thread.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
+
+
 
 
 
@@ -247,7 +257,10 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_19__components_user_info_user_info_component__["a" /* UserInfoComponent */],
             __WEBPACK_IMPORTED_MODULE_20__components_chat_sidebar_chat_sidebar_component__["a" /* ChatSidebarComponent */],
             __WEBPACK_IMPORTED_MODULE_21__components_chat_content_chat_content_component__["a" /* ChatContentComponent */],
-            __WEBPACK_IMPORTED_MODULE_23__components_create_message_create_message_component__["a" /* CreateMessageComponent */]
+            __WEBPACK_IMPORTED_MODULE_23__components_create_message_create_message_component__["a" /* CreateMessageComponent */],
+            __WEBPACK_IMPORTED_MODULE_24__components_company_company_component__["a" /* CompanyComponent */],
+            __WEBPACK_IMPORTED_MODULE_27__components_company_thread_company_thread_component__["a" /* CompanyThreadComponent */],
+            __WEBPACK_IMPORTED_MODULE_28__components_thread_thread_component__["a" /* ThreadComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["BrowserModule"],
@@ -262,6 +275,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_9__guards_auth_guard__["a" /* AuthGuard */],
             __WEBPACK_IMPORTED_MODULE_15__services_toastr_service__["a" /* ToastrService */],
             __WEBPACK_IMPORTED_MODULE_22__guards_redirect_if_logged_in_guard__["a" /* RedirectIfLoggedInGuard */],
+            __WEBPACK_IMPORTED_MODULE_25__services_company_service__["a" /* CompanyService */],
+            __WEBPACK_IMPORTED_MODULE_26__services_thread_service__["a" /* ThreadService */],
             { provide: __WEBPACK_IMPORTED_MODULE_13_ng2_toastr__["ToastOptions"], useClass: __WEBPACK_IMPORTED_MODULE_16__support_CustomToastr__["a" /* CustomToastr */] },
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */]]
@@ -275,7 +290,7 @@ AppModule = __decorate([
 /***/ "../../../../../src/app/components/chat-content/chat-content.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Chat</h1>\r\n\r\n<section class=\"row text-center placeholders\">\r\n    <div class=\"col-6 col-sm-3 placeholder\">\r\n        <img src=\"data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=\" width=\"200\" height=\"200\"\r\n             class=\"img-fluid rounded-circle\" alt=\"Generic placeholder thumbnail\">\r\n        <h4>Label</h4>\r\n        <div class=\"text-muted\">Something else</div>\r\n    </div>\r\n    <div class=\"col-6 col-sm-3 placeholder\">\r\n        <img src=\"data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=\" width=\"200\" height=\"200\"\r\n             class=\"img-fluid rounded-circle\" alt=\"Generic placeholder thumbnail\">\r\n        <h4>Label</h4>\r\n        <span class=\"text-muted\">Something else</span>\r\n    </div>\r\n    <div class=\"col-6 col-sm-3 placeholder\">\r\n        <img src=\"data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=\" width=\"200\" height=\"200\"\r\n             class=\"img-fluid rounded-circle\" alt=\"Generic placeholder thumbnail\">\r\n        <h4>Label</h4>\r\n        <span class=\"text-muted\">Something else</span>\r\n    </div>\r\n    <div class=\"col-6 col-sm-3 placeholder\">\r\n        <img src=\"data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=\" width=\"200\" height=\"200\"\r\n             class=\"img-fluid rounded-circle\" alt=\"Generic placeholder thumbnail\">\r\n        <h4>Label</h4>\r\n        <span class=\"text-muted\">Something else</span>\r\n    </div>\r\n</section>\r\n\r\n<h2>Section title</h2>\r\n<div class=\"table-responsive\">\r\n    <table class=\"table table-striped\">\r\n        <thead>\r\n        <tr>\r\n            <th>#</th>\r\n            <th>Header</th>\r\n            <th>Header</th>\r\n            <th>Header</th>\r\n            <th>Header</th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n        <tr>\r\n            <td>1,001</td>\r\n            <td>Lorem</td>\r\n            <td>ipsum</td>\r\n            <td>dolor</td>\r\n            <td>sit</td>\r\n        </tr>\r\n        <tr>\r\n            <td>1,002</td>\r\n            <td>amet</td>\r\n            <td>consectetur</td>\r\n            <td>adipiscing</td>\r\n            <td>elit</td>\r\n        </tr>\r\n        <tr>\r\n            <td>1,003</td>\r\n            <td>Integer</td>\r\n            <td>nec</td>\r\n            <td>odio</td>\r\n            <td>Praesent</td>\r\n        </tr>\r\n        <tr>\r\n            <td>1,003</td>\r\n            <td>libero</td>\r\n            <td>Sed</td>\r\n            <td>cursus</td>\r\n            <td>ante</td>\r\n        </tr>\r\n        <tr>\r\n            <td>1,004</td>\r\n            <td>dapibus</td>\r\n            <td>diam</td>\r\n            <td>Sed</td>\r\n            <td>nisi</td>\r\n        </tr>\r\n        <tr>\r\n            <td>1,005</td>\r\n            <td>Nulla</td>\r\n            <td>quis</td>\r\n            <td>sem</td>\r\n            <td>at</td>\r\n        </tr>\r\n        <tr>\r\n            <td>1,006</td>\r\n            <td>nibh</td>\r\n            <td>elementum</td>\r\n            <td>imperdiet</td>\r\n            <td>Duis</td>\r\n        </tr>\r\n        <tr>\r\n            <td>1,007</td>\r\n            <td>sagittis</td>\r\n            <td>ipsum</td>\r\n            <td>Praesent</td>\r\n            <td>mauris</td>\r\n        </tr>\r\n        <tr>\r\n            <td>1,008</td>\r\n            <td>Fusce</td>\r\n            <td>nec</td>\r\n            <td>tellus</td>\r\n            <td>sed</td>\r\n        </tr>\r\n        <tr>\r\n            <td>1,009</td>\r\n            <td>augue</td>\r\n            <td>semper</td>\r\n            <td>porta</td>\r\n            <td>Mauris</td>\r\n        </tr>\r\n        <tr>\r\n            <td>1,010</td>\r\n            <td>massa</td>\r\n            <td>Vestibulum</td>\r\n            <td>lacinia</td>\r\n            <td>arcu</td>\r\n        </tr>\r\n        <tr>\r\n            <td>1,011</td>\r\n            <td>eget</td>\r\n            <td>nulla</td>\r\n            <td>Class</td>\r\n            <td>aptent</td>\r\n        </tr>\r\n        <tr>\r\n            <td>1,012</td>\r\n            <td>taciti</td>\r\n            <td>sociosqu</td>\r\n            <td>ad</td>\r\n            <td>litora</td>\r\n        </tr>\r\n        <tr>\r\n            <td>1,013</td>\r\n            <td>torquent</td>\r\n            <td>per</td>\r\n            <td>conubia</td>\r\n            <td>nostra</td>\r\n        </tr>\r\n        <tr>\r\n            <td>1,014</td>\r\n            <td>per</td>\r\n            <td>inceptos</td>\r\n            <td>himenaeos</td>\r\n            <td>Curabitur</td>\r\n        </tr>\r\n        <tr>\r\n            <td>1,015</td>\r\n            <td>sodales</td>\r\n            <td>ligula</td>\r\n            <td>in</td>\r\n            <td>libero</td>\r\n        </tr>\r\n        </tbody>\r\n    </table>\r\n</div>"
+module.exports = "<div style=\"margin-top: 50px\">\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -336,7 +351,7 @@ ChatContentComponent = __decorate([
 /***/ "../../../../../src/app/components/chat-sidebar/chat-sidebar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"nav nav-pills flex-column\">\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link active\" href=\"#\">Overview <span class=\"sr-only\">(current)</span></a>\r\n    </li>\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">Reports</a>\r\n    </li>\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">Analytics</a>\r\n    </li>\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">Export</a>\r\n    </li>\r\n</ul>\r\n\r\n<ul class=\"nav nav-pills flex-column\">\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">Nav item</a>\r\n    </li>\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">Nav item again</a>\r\n    </li>\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">One more nav</a>\r\n    </li>\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">Another nav item</a>\r\n    </li>\r\n</ul>\r\n\r\n<ul class=\"nav nav-pills flex-column\">\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">Nav item again</a>\r\n    </li>\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">One more nav</a>\r\n    </li>\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">Another nav item</a>\r\n    </li>\r\n</ul>"
+module.exports = "<app-company></app-company>\r\n"
 
 /***/ }),
 
@@ -397,7 +412,7 @@ ChatSidebarComponent = __decorate([
 /***/ "../../../../../src/app/components/chat/chat.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n    <app-chat-sidebar class=\"col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar sidebar-chat\"></app-chat-sidebar>\r\n    <app-chat-content class=\"col-sm-9 ml-sm-auto col-md-10 pt-3 content-chat\"></app-chat-content>\r\n</div>\r\n"
+module.exports = "<div class=\"row\">\r\n  <app-chat-sidebar class=\"col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar sidebar-chat\"></app-chat-sidebar>\r\n  <app-chat-content class=\"col-sm-9 ml-sm-auto col-md-10 pt-3 content-chat\"></app-chat-content>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -452,6 +467,173 @@ ChatComponent = __decorate([
 ], ChatComponent);
 
 //# sourceMappingURL=C:/Users/nilse/Code/lachat/src/chat.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/company-thread/company-thread.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<li *ngFor=\"let thread of threads\" class=\"nav-item\">\n  <a [routerLink]=\"['/chat/threads/', thread.id]\" class=\"header nav-link pull-left\">\n    {{thread.subject}} <span class=\"sr-only\">(current)</span>\n  </a>\n</li>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/company-thread/company-thread.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/company-thread/company-thread.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CompanyThreadComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var CompanyThreadComponent = (function () {
+    function CompanyThreadComponent() {
+    }
+    CompanyThreadComponent.prototype.ngOnInit = function () {
+    };
+    return CompanyThreadComponent;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])('threads'),
+    __metadata("design:type", Array)
+], CompanyThreadComponent.prototype, "threads", void 0);
+CompanyThreadComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-company-thread',
+        template: __webpack_require__("../../../../../src/app/components/company-thread/company-thread.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/components/company-thread/company-thread.component.scss")]
+    }),
+    __metadata("design:paramtypes", [])
+], CompanyThreadComponent);
+
+//# sourceMappingURL=C:/Users/nilse/Code/lachat/src/company-thread.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/company/company.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<ul *ngFor=\"let company of companies; let i = index\" data-toggle=\"collapse\" [attr.data-target]=\"'#company-'+company.id\" class=\"nav nav-pills flex-column\">\n  <li class=\"nav-link text-white text-uppercase\" (click)=\"triggerThreadCollapse(company.id)\">{{company.name}}</li>\n  <app-company-thread [class]=\"(panel == company.id) || company.threadStatus ? 'collapse in' : 'collapse'\" [attr.aria-expanded]=\"panel == company.id ? true : false\" id=\"'#company-'{{company.id}}\" [threads]=\"company.threads\"></app-company-thread>\n</ul>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/company/company.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".collapse.in {\n  display: block !important; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/company/company.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CompanyComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_authentication_service__ = __webpack_require__("../../../../../src/app/services/authentication.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_toastr_service__ = __webpack_require__("../../../../../src/app/services/toastr.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_company_service__ = __webpack_require__("../../../../../src/app/services/company.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_thread_service__ = __webpack_require__("../../../../../src/app/services/thread.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models_Company__ = __webpack_require__("../../../../../src/app/models/Company.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+var CompanyComponent = (function () {
+    function CompanyComponent(router, authenticationService, companyService, threadsService, toastrService, route) {
+        this.router = router;
+        this.authenticationService = authenticationService;
+        this.companyService = companyService;
+        this.threadsService = threadsService;
+        this.toastrService = toastrService;
+        this.route = route;
+        this.companies = [__WEBPACK_IMPORTED_MODULE_6__models_Company__["a" /* Company */]];
+        this.loading = false;
+        this.error = '';
+        this.emitter = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+    }
+    CompanyComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        // reset login status
+        this.companyService.getCompanies().subscribe(function (data) {
+            _this.companies = data;
+            _this.threadsService.getThreads().subscribe(function (data) {
+                _this.companies.forEach(function (company, companyIndex, companyArr) {
+                    company.threads = [];
+                    data.forEach(function (thread, index, arr) {
+                        if (company.id == thread.company_id) {
+                            company.threads.push(thread);
+                        }
+                    });
+                });
+            });
+        });
+    };
+    CompanyComponent.prototype.triggerThreadCollapse = function (id) {
+        this.panel = id;
+    };
+    return CompanyComponent;
+}());
+CompanyComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-company',
+        template: __webpack_require__("../../../../../src/app/components/company/company.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/components/company/company.component.scss")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_authentication_service__["a" /* AuthenticationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_authentication_service__["a" /* AuthenticationService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__services_company_service__["a" /* CompanyService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_company_service__["a" /* CompanyService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5__services_thread_service__["a" /* ThreadService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_thread_service__["a" /* ThreadService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__services_toastr_service__["a" /* ToastrService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_toastr_service__["a" /* ToastrService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _f || Object])
+], CompanyComponent);
+
+var _a, _b, _c, _d, _e, _f;
+//# sourceMappingURL=C:/Users/nilse/Code/lachat/src/company.component.js.map
 
 /***/ }),
 
@@ -608,7 +790,7 @@ LoginComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/login/login.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/login/login.component.scss")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_authentication_service__["a" /* AuthenticationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_authentication_service__["a" /* AuthenticationService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__services_toastr_service__["a" /* ToastrService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_toastr_service__["a" /* ToastrService */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_authentication_service__["a" /* AuthenticationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_authentication_service__["a" /* AuthenticationService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__services_toastr_service__["a" /* ToastrService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_toastr_service__["a" /* ToastrService */]) === "function" && _c || Object])
 ], LoginComponent);
 
 var _a, _b, _c;
@@ -869,11 +1051,88 @@ RegisterComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/register/register.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/register/register.component.scss")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_authentication_service__["a" /* AuthenticationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_authentication_service__["a" /* AuthenticationService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__services_toastr_service__["a" /* ToastrService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_toastr_service__["a" /* ToastrService */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_authentication_service__["a" /* AuthenticationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_authentication_service__["a" /* AuthenticationService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__services_toastr_service__["a" /* ToastrService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_toastr_service__["a" /* ToastrService */]) === "function" && _c || Object])
 ], RegisterComponent);
 
 var _a, _b, _c;
 //# sourceMappingURL=C:/Users/nilse/Code/lachat/src/register.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/thread/thread.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  thread works!\n  thread by id: {{id}}\n</p>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/thread/thread.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/thread/thread.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ThreadComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_thread_service__ = __webpack_require__("../../../../../src/app/services/thread.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var ThreadComponent = (function () {
+    function ThreadComponent(route, threadServide) {
+        this.route = route;
+        this.threadServide = threadServide;
+    }
+    ThreadComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.sub = this.route.params.subscribe(function (params) {
+            var id = +params['id'];
+            _this.id = id;
+            _this.threadServide.activeThreadStatus.emit(id);
+        });
+        this.threadServide.getThread(this.id).subscribe(function (data) {
+            _this.thread = data;
+        });
+    };
+    return ThreadComponent;
+}());
+ThreadComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-thread',
+        template: __webpack_require__("../../../../../src/app/components/thread/thread.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/components/thread/thread.component.scss")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_thread_service__["a" /* ThreadService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_thread_service__["a" /* ThreadService */]) === "function" && _b || Object])
+], ThreadComponent);
+
+var _a, _b;
+//# sourceMappingURL=C:/Users/nilse/Code/lachat/src/thread.component.js.map
 
 /***/ }),
 
@@ -1114,7 +1373,7 @@ var AuthGuard = (function () {
 }());
 AuthGuard = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_toastr_service__["a" /* ToastrService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_toastr_service__["a" /* ToastrService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_toastr_service__["a" /* ToastrService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_toastr_service__["a" /* ToastrService */]) === "function" && _b || Object])
 ], AuthGuard);
 
 var _a, _b;
@@ -1156,7 +1415,7 @@ var RedirectIfLoggedInGuard = (function () {
 }());
 RedirectIfLoggedInGuard = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object])
 ], RedirectIfLoggedInGuard);
 
 var _a;
@@ -1181,6 +1440,23 @@ var arrays = {
     }
 };
 //# sourceMappingURL=C:/Users/nilse/Code/lachat/src/arrays.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/models/Company.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Company; });
+var Company = (function () {
+    function Company() {
+        this.threads = [];
+        this.threadStatus = false;
+    }
+    return Company;
+}());
+
+//# sourceMappingURL=C:/Users/nilse/Code/lachat/src/Company.js.map
 
 /***/ }),
 
@@ -1213,6 +1489,7 @@ var User = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_user_user_component__ = __webpack_require__("../../../../../src/app/components/user/user.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_chat_chat_component__ = __webpack_require__("../../../../../src/app/components/chat/chat.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__guards_redirect_if_logged_in_guard__ = __webpack_require__("../../../../../src/app/guards/redirect-if-logged-in.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_thread_thread_component__ = __webpack_require__("../../../../../src/app/components/thread/thread.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1228,11 +1505,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var appRoutes = [
     { path: 'login', component: __WEBPACK_IMPORTED_MODULE_1__components_login_login_component__["a" /* LoginComponent */] },
     { path: 'register', component: __WEBPACK_IMPORTED_MODULE_3__components_register_register_component__["a" /* RegisterComponent */] },
     { path: '', component: __WEBPACK_IMPORTED_MODULE_4__components_welcome_welcome_component__["a" /* WelcomeComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_8__guards_redirect_if_logged_in_guard__["a" /* RedirectIfLoggedInGuard */]] },
-    { path: 'chat', component: __WEBPACK_IMPORTED_MODULE_7__components_chat_chat_component__["a" /* ChatComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_5__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'chat', component: __WEBPACK_IMPORTED_MODULE_7__components_chat_chat_component__["a" /* ChatComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_5__guards_auth_guard__["a" /* AuthGuard */]],
+        children: [
+            { path: 'threads/:id', component: __WEBPACK_IMPORTED_MODULE_9__components_thread_thread_component__["a" /* ThreadComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_5__guards_auth_guard__["a" /* AuthGuard */]] },
+        ] },
     { path: 'user', component: __WEBPACK_IMPORTED_MODULE_6__components_user_user_component__["a" /* UserComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_5__guards_auth_guard__["a" /* AuthGuard */]] },
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
@@ -1250,10 +1531,10 @@ var AppRouterModule = (function () {
 AppRouterModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
         imports: [
-            __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* RouterModule */].forRoot(appRoutes, { useHash: useHash })
+            __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* RouterModule */].forRoot(appRoutes, { useHash: useHash })
         ],
         exports: [
-            __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* RouterModule */]
+            __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* RouterModule */]
         ],
         declarations: []
     })
@@ -1457,6 +1738,155 @@ AuthenticationService = __decorate([
 
 var _a, _b;
 //# sourceMappingURL=C:/Users/nilse/Code/lachat/src/authentication.service.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/services/company.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CompanyService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__config_app__ = __webpack_require__("../../../../../src/config/app.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__toastr_service__ = __webpack_require__("../../../../../src/app/services/toastr.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+
+
+
+var CompanyService = (function () {
+    /**
+     *
+     * @param {Http} http
+     * @param {ToastrService} toastrService
+     */
+    function CompanyService(http, toastrService) {
+        this.http = http;
+        this.toastrService = toastrService;
+        // set token if saved in local storage
+        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.token = currentUser && currentUser.token;
+    }
+    /**
+     * get all companies for user
+     *
+     * @returns {Observable<R>}
+     */
+    CompanyService.prototype.getCompanies = function () {
+        // add authorization header with jwt token
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Authorization': 'Bearer ' + this.token });
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestOptions */]({ headers: headers });
+        // get users from api
+        return this.http.get(__WEBPACK_IMPORTED_MODULE_3__config_app__["a" /* app */].api_url + '/api/companies', options)
+            .map(function (response) { return response.json(); });
+    };
+    return CompanyService;
+}());
+CompanyService = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */])),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__toastr_service__["a" /* ToastrService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__toastr_service__["a" /* ToastrService */]) === "function" && _b || Object])
+], CompanyService);
+
+var _a, _b;
+//# sourceMappingURL=C:/Users/nilse/Code/lachat/src/company.service.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/services/thread.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ThreadService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__config_app__ = __webpack_require__("../../../../../src/config/app.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__toastr_service__ = __webpack_require__("../../../../../src/app/services/toastr.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+
+
+
+var ThreadService = (function () {
+    /**
+     *
+     * @param {Http} http
+     * @param {ToastrService} toastrService
+     */
+    function ThreadService(http, toastrService) {
+        this.http = http;
+        this.toastrService = toastrService;
+        this.activeThreadStatus = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        // set token if saved in local storage
+        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.token = currentUser && currentUser.token;
+    }
+    /**
+     * get all companies for user
+     *
+     * @returns {Observable<R>}
+     */
+    ThreadService.prototype.getThreads = function () {
+        // add authorization header with jwt token
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Authorization': 'Bearer ' + this.token });
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestOptions */]({ headers: headers });
+        // get users from api
+        return this.http.get(__WEBPACK_IMPORTED_MODULE_3__config_app__["a" /* app */].api_url + '/api/threads', options)
+            .map(function (response) { return response.json(); });
+    };
+    /**
+     * get thread by id
+     *
+     * @param {string} id
+     * @returns {Observable<Thread>}
+     */
+    ThreadService.prototype.getThread = function (id) {
+        // add authorization header with jwt token
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Authorization': 'Bearer ' + this.token });
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestOptions */]({ headers: headers });
+        // get users from api
+        return this.http.get(__WEBPACK_IMPORTED_MODULE_3__config_app__["a" /* app */].api_url + '/api/threads/' + id, options)
+            .map(function (response) { return response.json(); });
+    };
+    return ThreadService;
+}());
+ThreadService = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */])),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__toastr_service__["a" /* ToastrService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__toastr_service__["a" /* ToastrService */]) === "function" && _b || Object])
+], ThreadService);
+
+var _a, _b;
+//# sourceMappingURL=C:/Users/nilse/Code/lachat/src/thread.service.js.map
 
 /***/ }),
 

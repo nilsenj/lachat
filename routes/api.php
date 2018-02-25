@@ -52,5 +52,10 @@ Route::group(['middleware' => ['api'], 'as' => 'api.'], function () {
     Route::resource('messages', 'Api\MessagesController', [
       'only' => ['index', 'store', 'show']
     ]);
+
+    Route::group(['prefix' => 'companies', 'as' => 'companies.'], function () {
+    });
+    Route::resource('companies', 'Api\CompanyController', []);
+    Route::resource('threads', 'Api\ThreadsController', []);
   });
 });

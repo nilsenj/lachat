@@ -8,12 +8,16 @@ import {AuthGuard} from "../../guards/auth.guard";
 import {UserComponent} from "../../components/user/user.component";
 import {ChatComponent} from "../../components/chat/chat.component";
 import {RedirectIfLoggedInGuard} from "../../guards/redirect-if-logged-in.guard";
+import {ThreadComponent} from "../../components/thread/thread.component";
 
 const appRoutes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
     {path: '', component: WelcomeComponent, canActivate: [RedirectIfLoggedInGuard]},
-    {path: 'chat', component: ChatComponent, canActivate: [AuthGuard]},
+    {path: 'chat', component: ChatComponent, canActivate: [AuthGuard],
+    children: [
+      {path: 'threads/:id', component: ThreadComponent, canActivate: [AuthGuard]},
+    ]},
     {path: 'user', component: UserComponent, canActivate: [AuthGuard]},
 
     // otherwise redirect to home

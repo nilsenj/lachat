@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Models\Company;
+use App\Models\Participant;
 use App\Models\Thread;
 use App\Traits\Messagable;
 use Illuminate\Notifications\Notifiable;
@@ -45,5 +47,15 @@ class User extends Authenticatable
   public function authorUser()
   {
     return $this->hasMany(Thread::class, 'author_id');
+  }
+
+  /**
+   * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+   */
+  public function companies()
+  {
+    $companyIds = $this->threads()->pluck('company_id');
+
+    return Company::whereIn('id', $companyIds);
   }
 }

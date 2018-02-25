@@ -22,6 +22,11 @@ import { ChatSidebarComponent } from './components/chat-sidebar/chat-sidebar.com
 import { ChatContentComponent } from './components/chat-content/chat-content.component';
 import {RedirectIfLoggedInGuard} from "./guards/redirect-if-logged-in.guard";
 import { CreateMessageComponent } from './components/create-message/create-message.component';
+import { CompanyComponent } from './components/company/company.component';
+import {CompanyService} from "./services/company.service";
+import {ThreadService} from "./services/thread.service";
+import { CompanyThreadComponent } from './components/company-thread/company-thread.component';
+import { ThreadComponent } from './components/thread/thread.component';
 
 @NgModule({
     declarations: [
@@ -36,7 +41,10 @@ import { CreateMessageComponent } from './components/create-message/create-messa
         UserInfoComponent,
         ChatSidebarComponent,
         ChatContentComponent,
-        CreateMessageComponent
+        CreateMessageComponent,
+        CompanyComponent,
+        CompanyThreadComponent,
+        ThreadComponent
     ],
     imports: [
         BrowserModule,
@@ -51,6 +59,8 @@ import { CreateMessageComponent } from './components/create-message/create-messa
         AuthGuard,
         ToastrService,
         RedirectIfLoggedInGuard,
+        CompanyService,
+        ThreadService,
         {provide: ToastOptions, useClass: CustomToastr},
     ],
     bootstrap: [AppComponent]
