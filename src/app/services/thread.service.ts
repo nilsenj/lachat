@@ -17,7 +17,7 @@ export class ThreadService {
    *token field
    */
   public token: string;
-  public activeThreadStatus = new Subject<any>();
+  public activeThreadStatus = new EventEmitter();
 
   /**
    *

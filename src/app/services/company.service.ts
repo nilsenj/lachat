@@ -6,6 +6,7 @@ import {app} from "../../config/app";
 import {arrays} from "../helpers/arrays";
 import {ToastrService} from "./toastr.service";
 import {Company} from "../models/Company";
+import {Subject} from "rxjs/Subject";
 
 @Injectable()
 export class CompanyService {

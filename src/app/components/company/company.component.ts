@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AuthenticationService} from "../../services/authentication.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ToastrService} from "../../services/toastr.service";
@@ -17,11 +17,12 @@ export class CompanyComponent implements OnInit {
   public sub: any;
   public activeThreadId: number | string;
   public thread;
-  companies: any = [Company];
-  loading = false;
-  panel: any;
-  error = '';
+  public companies: any = [Company];
+  public loading = false;
+  public panel: any;
+  public error = '';
   public emitter = new EventEmitter();
+  public activeThread: any;
 
   constructor(private router: Router,
               private authenticationService: AuthenticationService,
@@ -49,15 +50,15 @@ export class CompanyComponent implements OnInit {
     });
     this.threadsService.activeThreadStatus.subscribe((thread) => {
       this.emitter.subscribe((data) => {
-        if(data == 'companies_load') {
+        if (data == 'companies_load') {
           console.log('Event: companies_load');
           this.companies.forEach((company, index, arr) => {
-            console.log(company.id == thread.company_id);
             if (company.id == thread.company_id) {
               this.panel = company.id;
             }
           });
         }
+        this.activeThread = thread;
       });
     });
   }
