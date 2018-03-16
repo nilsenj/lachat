@@ -89,7 +89,23 @@ class ThreadsController extends Controller
 //        $users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
     $thread->markAsRead($userId);
     $thread->load('messages');
-    return response()->json(compact('thread', 'users'));
+    $thread->users = $users;
+    return response()->json($thread);
+  }
+
+  /**
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+  public function sideThreads(Request $request)
+  {
+    $currentUserId = $request->user()->id;
+    // All threads, ignore deleted/archived participants
+    //$threads = Thread::getAllLatest()->get();
+    // All threads that user is participating in
+    $threads = Thread::forUser($currentUserId)->latest('updated_at')->get();
+
+    return response()->json(compact('threads'));
   }
 
   /**

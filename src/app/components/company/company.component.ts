@@ -19,7 +19,7 @@ export class CompanyComponent implements OnInit {
   public thread;
   companies: any = [Company];
   loading = false;
-  panel: number | string;
+  panel: any;
   error = '';
   public emitter = new EventEmitter();
 
@@ -44,6 +44,20 @@ export class CompanyComponent implements OnInit {
             }
           });
         });
+        this.emitter.emit('companies_load');
+      });
+    });
+    this.threadsService.activeThreadStatus.subscribe((thread) => {
+      this.emitter.subscribe((data) => {
+        if(data == 'companies_load') {
+          console.log('Event: companies_load');
+          this.companies.forEach((company, index, arr) => {
+            console.log(company.id == thread.company_id);
+            if (company.id == thread.company_id) {
+              this.panel = company.id;
+            }
+          });
+        }
       });
     });
   }

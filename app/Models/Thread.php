@@ -168,15 +168,23 @@ class Thread extends Eloquent
    *
    * @return Builder
    */
-  public function scopeForUser(Builder $query, $userId)
+  public function scopeForUser(Builder $query, $userId, $select = [])
   {
     $participantsTable = Models::table('participants');
     $threadsTable = Models::table('threads');
+    if (!empty($select)) {
+      $newSel = [];
+      foreach ($select as $sel) {
+        $newSel[] = $threadsTable . '.' . $sel;
+      }
+    } else {
+      $newSel = $threadsTable . '.*';
+    }
 
     return $query->join($participantsTable, $this->getQualifiedKeyName(), '=', $participantsTable . '.thread_id')
       ->where($participantsTable . '.user_id', $userId)
       ->where($participantsTable . '.deleted_at', null)
-      ->select($threadsTable . '.*');
+      ->select($newSel);
   }
 
   /**

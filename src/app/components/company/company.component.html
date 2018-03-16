@@ -1,4 +1,4 @@
 <ul *ngFor="let company of companies; let i = index" data-toggle="collapse" [attr.data-target]="'#company-'+company.id" class="nav nav-pills flex-column">
   <li class="nav-link text-white text-uppercase" (click)="triggerThreadCollapse(company.id)">{{company.name}}</li>
-  <app-company-thread [class]="(panel == company.id) || company.threadStatus ? 'collapse in' : 'collapse'" [attr.aria-expanded]="panel == company.id ? true : false" id="'#company-'{{company.id}}" [threads]="company.threads"></app-company-thread>
+  <app-company-thread *ngIf="panel" [class]="(panel == company.id) ? 'collapse in' : 'collapse'" [attr.aria-expanded]="panel == company.id ? true : false" id="'#company-'{{company.id}}" [threads]="company.threads"></app-company-thread>
 </ul>
