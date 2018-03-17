@@ -42,15 +42,25 @@ class CompanyController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+  /**
+   * @param Request $request
+   * @param $id
+   * @return \Illuminate\Http\JsonResponse
+   */
+    public function show(Request $request, $id)
     {
-        //
+      try {
+        $company = Company::findOrFail($id);
+      } catch (ModelNotFoundException $e) {
+        return response()->json(['error_message' => 'The company with ID: ' .
+          $id . ' was not found.'], 404);
+      }
+
+      $company->load('threads')->map(function ($item) {
+        var_dump($item);
+      });
+
+      return response()->json($company);
     }
 
     /**

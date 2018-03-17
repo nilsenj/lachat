@@ -27,6 +27,7 @@ import {CompanyService} from "./services/company.service";
 import {ThreadService} from "./services/thread.service";
 import { CompanyThreadComponent } from './components/company-thread/company-thread.component';
 import { ThreadComponent } from './components/thread/thread.component';
+import { CompanyBlockComponent } from './components/company-block/company-block.component';
 
 @NgModule({
     declarations: [
@@ -44,7 +45,8 @@ import { ThreadComponent } from './components/thread/thread.component';
         CreateMessageComponent,
         CompanyComponent,
         CompanyThreadComponent,
-        ThreadComponent
+        ThreadComponent,
+        CompanyBlockComponent
     ],
     imports: [
         BrowserModule,

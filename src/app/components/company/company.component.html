@@ -1,13 +1,23 @@
+<button class="companies-list-toggle" (click)="openSelectCompany()">
+  <i class="glyphicon glyphicon-briefcase"></i>
+  Select Company:
+  <span *ngIf="company" class="company-name">{{company.name}}</span>
+  <span *ngIf="!company" class="company-name">None</span>
+</button>
+<span *ngIf="openSelectCompanyStatus" class="companies-list-container">
 <ul *ngFor="let company of companies; let i = index" data-toggle="collapse" [attr.data-target]="'#company-'+company.id"
-    class="nav nav-pills flex-column">
+    class="nav nav-pills flex-column companies-list">
   <li
     [class]="(panel == company.id) ? 'nav-link text-white text-uppercase active' : 'nav-link text-white text-uppercase'"
-    (click)="triggerThreadCollapse(company.id)"><div class="company-name">{{company.name}}</div>
+    (click)="selectCompany(company)"><div class="company-name" [routerLink]="['/chat/company/'+company.id]">
+    {{company.name}}</div>
     <i *ngIf="panel == company.id" class="glyphicon glyphicon-minus"></i>
     <i *ngIf="panel != company.id" class="glyphicon glyphicon-plus"></i>
   </li>
-  <app-company-thread *ngIf="panel" [activeThread]="activeThread"
-                      [class]="(panel == company.id) ? 'collapse in' : 'collapse'"
-                      [attr.aria-expanded]="panel == company.id ? true : false" id="'#company-'{{company.id}}"
-                      [threads]="company.threads"></app-company-thread>
 </ul>
+</span>
+
+<!--<app-company-thread *ngIf="panel" [activeThread]="activeThread"-->
+<!--[class]="(panel == company.id) ? 'collapse in' : 'collapse'"-->
+<!--[attr.aria-expanded]="panel == company.id ? true : false" id="'#company-'{{company.id}}"-->
+<!--[threads]="company.threads"></app-company-thread>-->

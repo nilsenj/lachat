@@ -30,3 +30,22 @@ li.nav-link.text-white.text-uppercase  {
     color: white!important;
   }
 }
+.company-name {
+  font-size: 1rem!important;
+  color: #aaaaaa;
+}
+.companies-list-toggle {
+  background: transparent;
+  outline: none;
+  border: none;
+  font-weight: 600;color: white;
+  border-bottom: 1px solid;
+  padding-left: 10px;
+  width: 100%;
+}
+.companies-list-container {
+  position: relative;
+  display: block;
+}
+.companies-list {
+}

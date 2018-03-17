@@ -19,10 +19,12 @@ export class CompanyComponent implements OnInit {
   public thread;
   public companies: any = [Company];
   public loading = false;
-  public panel: any;
+  public company: Company;
+  public companyId: string | number = 0;
   public error = '';
   public emitter = new EventEmitter();
   public activeThread: any;
+  public openSelectCompanyStatus: boolean = false;
 
   constructor(private router: Router,
               private authenticationService: AuthenticationService,
@@ -54,7 +56,8 @@ export class CompanyComponent implements OnInit {
           console.log('Event: companies_load');
           this.companies.forEach((company, index, arr) => {
             if (company.id == thread.company_id) {
-              this.panel = company.id;
+              this.companyId = company.id;
+              this.company = company;
             }
           });
         }
@@ -63,7 +66,17 @@ export class CompanyComponent implements OnInit {
     });
   }
 
-  triggerThreadCollapse(id: number | string) {
-    this.panel = id;
+  openSelectCompany() {
+    if (this.openSelectCompanyStatus) {
+      this.openSelectCompanyStatus = false;
+    } else {
+      this.openSelectCompanyStatus = true;
+    }
+  }
+
+  selectCompany(company: Company) {
+    this.companyId = company.id;
+    this.company = company;
+    this.openSelectCompanyStatus = false;
   }
 }
