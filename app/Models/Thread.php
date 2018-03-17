@@ -33,6 +33,7 @@ class Thread extends Eloquent
    */
   protected $dates = ['deleted_at'];
 
+
   /**
    * Internal cache for creator.
    *

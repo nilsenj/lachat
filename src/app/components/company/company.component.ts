@@ -45,10 +45,6 @@ export class CompanyComponent implements OnInit {
         });
       }
     });
-  }
-
-  ngOnInit() {
-    // reset login status
     this.companyService.getCompanies().subscribe(data => {
       this.companies = data;
       this.threadsService.getThreads().subscribe(data => {
@@ -73,10 +69,13 @@ export class CompanyComponent implements OnInit {
               this.company = company;
             }
           });
+          this.activeThread = thread;
         }
-        this.activeThread = thread;
       });
     });
+  }
+
+  ngOnInit() {
   }
 
   openSelectCompany() {

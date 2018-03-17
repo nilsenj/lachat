@@ -10,7 +10,7 @@ export class ChatComponent implements OnInit {
 
   constructor(threadService: ThreadService) {
     threadService.activeThreadStatus.subscribe((id) => {
-      console.log('thread changed to #:' + id);
+
     });
   }
 

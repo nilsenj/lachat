@@ -1,11 +1,10 @@
 <span *ngIf="company && threads">
-<li *ngFor="let thread of threads" class="thread-item nav-item">
+<li *ngFor="let thread of threads | pipeThreads: 'date'" class="thread-item nav-item">
   <a [routerLink]="['/chat/company/'+company.id+'/threads/', thread.id]"
      (click)="changeActiveThreadId(thread.id)"
      [class]="(activeThreadId == thread.id) ? 'header nav-link pull-left active' : 'header nav-link pull-left'">
     <i *ngIf="activeThreadId == thread.id" class="glyphicon glyphicon-ok-circle"></i>
     <i *ngIf="activeThreadId != thread.id" class="glyphicon glyphicon-ok-circle"></i> {{thread.subject}}
-    <span class="sr-only">(current)</span>
   </a>
 </li>
 </span>

@@ -25,12 +25,7 @@ export class CompanyThreadComponent implements OnInit {
     if (this.company) {
       this.activeCompanyId = this.company.id;
     }
-  }
-
-
-  ngOnInit() {
     this.route.params.subscribe(params => {
-      console.log(params);
       if (+params['id']) {
         let id: number = +params['id'];
         this.companyService.getCompany(id).subscribe((data) => {
@@ -38,15 +33,23 @@ export class CompanyThreadComponent implements OnInit {
           this.activeCompanyId = data.id;
           this.companyService.activeCompanyStatus.emit(data);
         });
-        this.threadService.activeThreadStatus.subscribe((data) => {
-          if (data) {
-            let id: number = data.id;
-            this.activeThread = data;
-            this.activeThreadId = data.id;
-          }
-        });
+        if (+params['threadId']) {
+          let threadId: number = +params['threadId'];
+          this.threadService.getThread(threadId).subscribe((thread) => {
+            if (thread) {
+              let id: number | string = thread.id;
+              this.activeThread = thread;
+              this.activeThreadId = id;
+            }
+          });
+        }
       }
     });
+
+  }
+
+
+  ngOnInit() {
   }
 
   /**

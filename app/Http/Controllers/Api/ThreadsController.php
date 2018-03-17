@@ -28,7 +28,7 @@ class ThreadsController extends Controller
     // All threads, ignore deleted/archived participants
     //$threads = Thread::getAllLatest()->get();
     // All threads that user is participating in
-    $threads = Thread::forUser($currentUserId)->latest('updated_at')->get();
+    $threads = Thread::forUser($currentUserId)->latest('updated_at')->orderBy('subject')->get();
     // All threads that user is participating in, with new messages
 //      $threads = Thread::forUserWithNewMessages($currentUserId)->latest('updated_at')->get();
     return response()->json($threads);

@@ -18,11 +18,14 @@ export class ThreadComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       let id: number = +params['threadId'];
       this.id = id;
-      this.threadService.getThread(this.id).subscribe((data) => {
-        this.data = data;
-        this.threadService.activeThreadStatus.emit(data);
-      });
+      if(id) {
+        this.threadService.getThread(this.id).subscribe((data) => {
+          this.data = data;
+          this.threadService.activeThreadStatus.emit(data);
+        });
+      }
     });
+
   }
 
   ngOnInit() {

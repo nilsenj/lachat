@@ -1,5 +1,6 @@
+<span *ngIf="data">
 <div class="subject">
-  <div *ngIf="data" class="title">subject:
+  <div class="title">subject:
     {{data.subject}}
   </div>
 </div>
@@ -7,3 +8,8 @@
   thread works!
   thread by id: {{id}}
 </p>
+</span>
+
+<span *ngIf="!data">
+  <h3 class="text-info">Please select a thread</h3>
+</span>
