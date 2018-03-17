@@ -34,14 +34,17 @@ export class CompanyComponent implements OnInit {
               private threadsService: ThreadService,
               private toastrService: ToastrService,
               private route: ActivatedRoute) {
-    this.sub = this.route.params.subscribe(params => {
-      let id: number = +params['id'];
-      this.id = id;
+    this.route.params.subscribe(params => {
       console.log(params);
-      this.companyService.getCompany(this.id).subscribe((data) => {
-        this.data = data;
-        this.companyService.activeCompanyStatus.emit(data);
-      });
+      if (+params['id']) {
+        let id: number = +params['id'];
+        this.id = id;
+        this.companyService.getCompany(this.id).subscribe((data) => {
+          this.company = data;
+          this.companyId = data.id;
+          this.companyService.activeCompanyStatus.emit(data);
+        });
+      }
     });
   }
 

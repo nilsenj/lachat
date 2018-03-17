@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Thread} from "../../models/Thread";
 import {ThreadService} from "../../services/thread.service";
 import {ActivatedRoute} from "@angular/router";
+import {Company} from "../../models/Company";
 
 @Component({
   selector: 'app-company-thread',
@@ -10,6 +11,7 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class CompanyThreadComponent implements OnInit {
   @Input('threads') threads: [Thread];
+  @Input('company') company: [Company];
   @Input('activeThread') activeThread: any;
   activeThreadId: number = null;
 

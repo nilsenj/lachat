@@ -51,7 +51,7 @@ export class CompanyService {
    * @param {string} id
    * @returns {Observable<Thread>}
    */
-  getCompany(id: number | string): Observable<Thread> {
+  getCompany(id: number | string): Observable<Company> {
     // add authorization header with jwt token
     let headers = new Headers({'Authorization': 'Bearer ' + this.token});
     let options = new RequestOptions({headers: headers});
