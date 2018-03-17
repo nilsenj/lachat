@@ -56,7 +56,7 @@ class CompanyController extends Controller
         $id . ' was not found.'], 404);
     }
     $user = $request->user();
-    $threads = $company->threads()->forUser($user->id)->get();
+    $threads = $company->threads()->forUser($user->id)->latest('updated_at')->orderBy('subject')->get();
     $company->threads = $threads;
 
     return response()->json($company);
