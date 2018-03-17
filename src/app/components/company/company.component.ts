@@ -14,7 +14,6 @@ import {Company} from "../../models/Company";
 export class CompanyComponent implements OnInit {
 
 
-  public sub: any;
   public activeThreadId: number | string;
   public thread;
   public companies: any = [Company];
@@ -25,6 +24,9 @@ export class CompanyComponent implements OnInit {
   public emitter = new EventEmitter();
   public activeThread: any;
   public openSelectCompanyStatus: boolean = false;
+  public sub: any;
+  public id: number | string;
+  public data: any;
 
   constructor(private router: Router,
               private authenticationService: AuthenticationService,
@@ -32,6 +34,15 @@ export class CompanyComponent implements OnInit {
               private threadsService: ThreadService,
               private toastrService: ToastrService,
               private route: ActivatedRoute) {
+    this.sub = this.route.params.subscribe(params => {
+      let id: number = +params['id'];
+      this.id = id;
+      console.log(params);
+      this.companyService.getCompany(this.id).subscribe((data) => {
+        this.data = data;
+        this.companyService.activeCompanyStatus.emit(data);
+      });
+    });
   }
 
   ngOnInit() {

@@ -19,7 +19,7 @@ const appRoutes: Routes = [
   {
     path: 'chat', component: ChatComponent, canActivate: [AuthGuard],
     children: [
-      {path: 'company/:id', component: CompanyBlockComponent, canActivate: [AuthGuard],
+      {path: 'company/:id', component: ChatComponent, canActivate: [AuthGuard],
       children: [
         {path: 'threads/:id', component: ThreadComponent, canActivate: [AuthGuard]},
       ]},
