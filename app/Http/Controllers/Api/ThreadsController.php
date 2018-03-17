@@ -88,7 +88,7 @@ class ThreadsController extends Controller
     $userId = $request->user()->id;
 //        $users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
     $thread->markAsRead($userId);
-    $thread->load('messages');
+    $thread->load(['messages', 'company']);
     $thread->users = $users;
     return response()->json($thread);
   }

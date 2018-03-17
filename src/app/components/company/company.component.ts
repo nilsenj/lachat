@@ -35,7 +35,6 @@ export class CompanyComponent implements OnInit {
               private toastrService: ToastrService,
               private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
-      console.log(params);
       if (+params['id']) {
         let id: number = +params['id'];
         this.id = id;

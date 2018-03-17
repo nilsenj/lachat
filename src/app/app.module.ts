@@ -28,6 +28,7 @@ import {ThreadService} from "./services/thread.service";
 import { CompanyThreadComponent } from './components/company-thread/company-thread.component';
 import { ThreadComponent } from './components/thread/thread.component';
 import { CompanyBlockComponent } from './components/company-block/company-block.component';
+import { ChatInnerComponent } from './components/chat-inner/chat-inner.component';
 
 @NgModule({
     declarations: [
@@ -46,7 +47,8 @@ import { CompanyBlockComponent } from './components/company-block/company-block.
         CompanyComponent,
         CompanyThreadComponent,
         ThreadComponent,
-        CompanyBlockComponent
+        CompanyBlockComponent,
+        ChatInnerComponent
     ],
     imports: [
         BrowserModule,

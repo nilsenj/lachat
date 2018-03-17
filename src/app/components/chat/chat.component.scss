@@ -13,3 +13,12 @@
   overflow-y: auto;
   border-right: 1px solid #eee;
 }
+
+.content-chat {
+  background: #cccccc;
+  margin-left: 10% !important;
+}
+
+body > app-root > div > app-chat > div > app-chat-inner > div > app-chat > div > app-chat-sidebar {
+  display: none;
+}

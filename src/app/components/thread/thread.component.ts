@@ -16,9 +16,8 @@ export class ThreadComponent implements OnInit {
 
   constructor(public route: ActivatedRoute, private threadService: ThreadService) {
     this.sub = this.route.params.subscribe(params => {
-      let id: number = +params['id'];
+      let id: number = +params['threadId'];
       this.id = id;
-      console.log(params);
       this.threadService.getThread(this.id).subscribe((data) => {
         this.data = data;
         this.threadService.activeThreadStatus.emit(data);
