@@ -35,9 +35,7 @@ class ThreadsController extends Controller
   }
 
   /**
-   * Show the form for creating a new resource.
    *
-   * @return \Illuminate\Http\Response
    */
   public function create()
   {
@@ -51,7 +49,7 @@ class ThreadsController extends Controller
    */
   public function store(Request $request)
   {
-    $input = Input::all();
+    $input = $request->all();
     $thread = Thread::create(
       [
         'subject' => !empty($input['subject']) ? $input['subject'] : '',
@@ -59,11 +57,11 @@ class ThreadsController extends Controller
       ]
     );
 
-    $participants = [];
-    // Recipients
-    if (Input::has('recipients')) {
-      $participants = $thread->addParticipants($input['recipients']);
+    // Manage recipients
+    if ($request->has('recipients')) {
+      $thread->addParticipants($input['recipients']);
     }
+
     return response()->json([
       'thread_id' => $thread->id], 200);
   }
@@ -82,14 +80,12 @@ class ThreadsController extends Controller
       return response()->json(['error_message' => 'The thread with ID: ' .
         $id . ' was not found.'], 404);
     }
-    // show current user in list if not a current participant
-    $users = User::whereIn('id', $thread->participantsUserIds())->get();
     // don't show the current user in list
     $userId = $request->user()->id;
 //        $users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
     $thread->markAsRead($userId);
-    $thread->load(['messages', 'company']);
-    $thread->users = $users;
+    $thread->load([]);
+
     return response()->json($thread);
   }
 

@@ -179,7 +179,8 @@ return [
     \Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
     \Barryvdh\Debugbar\ServiceProvider::class,
     \Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
-    \App\Providers\ChatServiceProvider::class
+    \App\Providers\ChatServiceProvider::class,
+    Laravolt\Avatar\ServiceProvider::class,
   ],
 
   /*
@@ -229,6 +230,7 @@ return [
     'Validator' => Illuminate\Support\Facades\Validator::class,
     'View' => Illuminate\Support\Facades\View::class,
     'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+    'Avatar' => Laravolt\Avatar\Facade::class,
 
   ],
 

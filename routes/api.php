@@ -48,6 +48,10 @@ Route::group(['middleware' => ['api'], 'as' => 'api.'], function () {
         'uses' => 'Api\MessagesController@openThread',
         'as' => 'openThread'
       ]);
+      Route::get('/thread/{threadId}', [
+        'uses' => 'Api\MessagesController@threadMessages',
+        'as' => 'threadMessages'
+      ]);
     });
     Route::resource('messages', 'Api\MessagesController', [
       'only' => ['index', 'store', 'show']

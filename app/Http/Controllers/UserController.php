@@ -10,18 +10,19 @@ use Illuminate\Http\Request;
  */
 class UserController extends Controller
 {
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function index(Request $request)
-    {
-        $data = [];
-        $data['id'] = $request->user()->id;
-        $data['name'] = $request->user()->name;
-        $data['email'] = $request->user()->email;
-        return response()->json([
-            'data' => $data,
-        ]);
-    }
+  /**
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+  public function index(Request $request)
+  {
+    $data = [];
+    $data['id'] = $request->user()->id;
+    $data['name'] = $request->user()->name;
+    $data['email'] = $request->user()->email;
+    $data['avatar'] = $request->user()->avatar;
+    return response()->json([
+      'data' => $data,
+    ]);
+  }
 }
