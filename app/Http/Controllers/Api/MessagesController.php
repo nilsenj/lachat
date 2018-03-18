@@ -34,7 +34,7 @@ class MessagesController extends Controller
 //        $users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
     $thread->markAsRead($userId);
     $thread->load(['messages']);
-
+    $thread->messages->load('user');
     return response()->json($thread->messages);
   }
 

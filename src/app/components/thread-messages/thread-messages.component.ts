@@ -12,6 +12,7 @@ import {Message} from "../../models/Message";
 export class ThreadMessagesComponent implements OnInit {
   @Input('thread') thread: Thread;
   public messages: Message[];
+  public currentUser: any;
 
   /**
    *
@@ -19,6 +20,7 @@ export class ThreadMessagesComponent implements OnInit {
    * @param {MessagesService} messagesService
    */
   constructor(private threadService: ThreadService, private messagesService: MessagesService) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngOnInit(): void {
@@ -28,6 +30,13 @@ export class ThreadMessagesComponent implements OnInit {
         this.messagesService.messagesLoadStatus.emit(messages);
       });
     }
+    this.threadService.activeThreadStatus.subscribe((thread) => {
+      this.thread = thread;
+      this.messagesService.getMessages(thread.id).subscribe((messages) => {
+        this.messages = messages;
+        this.messagesService.messagesLoadStatus.emit(messages);
+      });
+    });
   }
 
 }
