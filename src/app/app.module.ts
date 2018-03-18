@@ -27,6 +27,8 @@ import {CompanyService} from "./services/company.service";
 import {ThreadService} from "./services/thread.service";
 import { CompanyThreadComponent } from './components/company-thread/company-thread.component';
 import { ThreadComponent } from './components/thread/thread.component';
+import { ChatInnerComponent } from './components/chat-inner/chat-inner.component';
+import { PipeThreadsPipe } from './pipes/pipe-threads.pipe';
 
 @NgModule({
     declarations: [
@@ -44,7 +46,9 @@ import { ThreadComponent } from './components/thread/thread.component';
         CreateMessageComponent,
         CompanyComponent,
         CompanyThreadComponent,
-        ThreadComponent
+        ThreadComponent,
+        ChatInnerComponent,
+        PipeThreadsPipe
     ],
     imports: [
         BrowserModule,

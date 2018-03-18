@@ -1,0 +1,19 @@
+.thread-item {
+  list-style-type: none;
+}
+
+.header.nav-link.pull-left {
+  padding: .5rem 1.25rem;
+  color: rgb(202, 196, 201);
+  i {
+    color: rgb(202, 196, 201);
+  }
+  &.active {
+    background: transparent;
+    font-weight: 600;
+    color: white;
+    i {
+      color: #28a745;
+    }
+  }
+}

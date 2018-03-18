@@ -6,6 +6,8 @@ import {app} from "../../config/app";
 import {arrays} from "../helpers/arrays";
 import {ToastrService} from "./toastr.service";
 import {Company} from "../models/Company";
+import {Subject} from "rxjs/Subject";
+import {Thread} from "../models/Thread";
 
 @Injectable()
 export class CompanyService {
@@ -14,6 +16,7 @@ export class CompanyService {
    *token field
    */
   public token: string;
+  public activeCompanyStatus = new EventEmitter();
 
   /**
    *
@@ -39,6 +42,22 @@ export class CompanyService {
 
     // get users from api
     return this.http.get(app.api_url + '/api/companies', options)
+      .map((response: Response) => response.json());
+  }
+
+  /**
+   * get company by id
+   *
+   * @param {string} id
+   * @returns {Observable<Thread>}
+   */
+  getCompany(id: number | string): Observable<Company> {
+    // add authorization header with jwt token
+    let headers = new Headers({'Authorization': 'Bearer ' + this.token});
+    let options = new RequestOptions({headers: headers});
+
+    // get users from api
+    return this.http.get(app.api_url + '/api/companies/' + id, options)
       .map((response: Response) => response.json());
   }
 }

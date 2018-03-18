@@ -53,6 +53,13 @@ Route::group(['middleware' => ['api'], 'as' => 'api.'], function () {
       'only' => ['index', 'store', 'show']
     ]);
 
+    Route::group(['prefix' => 'threads', 'as' => 'threads.'], function () {
+      Route::get('/sideThreads', [
+        'uses' => 'Api\ThreadsController@sideThreads',
+        'as' => 'sideThreads'
+      ]);
+    });
+
     Route::group(['prefix' => 'companies', 'as' => 'companies.'], function () {
     });
     Route::resource('companies', 'Api\CompanyController', []);

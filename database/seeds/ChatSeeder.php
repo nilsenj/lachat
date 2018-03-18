@@ -13,7 +13,7 @@ class ChatSeeder extends Seeder
   {
     $faker = Faker\Factory::create();
 
-    factory(\App\Models\Thread::class, 300)->create()
+    factory(\App\Models\Thread::class, 600)->create()
       ->each(function (\App\Models\Thread $p) use ($faker) {
         $author_id = $p->author_id;
         $user_id = $faker->numberBetween(1,21);

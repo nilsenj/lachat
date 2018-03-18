@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AuthenticationService} from "../../services/authentication.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ToastrService} from "../../services/toastr.service";
@@ -14,14 +14,19 @@ import {Company} from "../../models/Company";
 export class CompanyComponent implements OnInit {
 
 
-  public sub: any;
   public activeThreadId: number | string;
   public thread;
-  companies: any = [Company];
-  loading = false;
-  panel: number | string;
-  error = '';
+  public companies: any = [Company];
+  public loading = false;
+  public company: Company;
+  public companyId: string | number = 0;
+  public error = '';
   public emitter = new EventEmitter();
+  public activeThread: any;
+  public openSelectCompanyStatus: boolean = false;
+  public sub: any;
+  public id: number | string;
+  public data: any;
 
   constructor(private router: Router,
               private authenticationService: AuthenticationService,
@@ -29,10 +34,17 @@ export class CompanyComponent implements OnInit {
               private threadsService: ThreadService,
               private toastrService: ToastrService,
               private route: ActivatedRoute) {
-  }
-
-  ngOnInit() {
-    // reset login status
+    this.route.params.subscribe(params => {
+      if (+params['id']) {
+        let id: number = +params['id'];
+        this.id = id;
+        this.companyService.getCompany(this.id).subscribe((data) => {
+          this.company = data;
+          this.companyId = data.id;
+          this.companyService.activeCompanyStatus.emit(data);
+        });
+      }
+    });
     this.companyService.getCompanies().subscribe(data => {
       this.companies = data;
       this.threadsService.getThreads().subscribe(data => {
@@ -44,11 +56,39 @@ export class CompanyComponent implements OnInit {
             }
           });
         });
+        this.emitter.emit('companies_load');
+      });
+    });
+    this.threadsService.activeThreadStatus.subscribe((thread) => {
+      this.emitter.subscribe((data) => {
+        if (data == 'companies_load') {
+          console.log('Event: companies_load');
+          this.companies.forEach((company, index, arr) => {
+            if (company.id == thread.company_id) {
+              this.companyId = company.id;
+              this.company = company;
+            }
+          });
+          this.activeThread = thread;
+        }
       });
     });
   }
 
-  triggerThreadCollapse(id: number | string) {
-    this.panel = id;
+  ngOnInit() {
+  }
+
+  openSelectCompany() {
+    if (this.openSelectCompanyStatus) {
+      this.openSelectCompanyStatus = false;
+    } else {
+      this.openSelectCompanyStatus = true;
+    }
+  }
+
+  selectCompany(company: Company) {
+    this.companyId = company.id;
+    this.company = company;
+    this.openSelectCompanyStatus = false;
   }
 }

@@ -1,4 +1,5 @@
 export class Company {
+  id: string;
   name: string;
   creator_id: number;
   created_at: string;
