@@ -29,6 +29,8 @@ import { CompanyThreadComponent } from './components/company-thread/company-thre
 import { ThreadComponent } from './components/thread/thread.component';
 import { ChatInnerComponent } from './components/chat-inner/chat-inner.component';
 import { PipeThreadsPipe } from './pipes/pipe-threads.pipe';
+import { ThreadMessagesComponent } from './components/thread-messages/thread-messages.component';
+import { ThreadMessageInputComponent } from './components/thread-message-input/thread-message-input.component';
 
 @NgModule({
     declarations: [
@@ -48,7 +50,9 @@ import { PipeThreadsPipe } from './pipes/pipe-threads.pipe';
         CompanyThreadComponent,
         ThreadComponent,
         ChatInnerComponent,
-        PipeThreadsPipe
+        PipeThreadsPipe,
+        ThreadMessagesComponent,
+        ThreadMessageInputComponent
     ],
     imports: [
         BrowserModule,
