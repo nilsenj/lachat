@@ -86,6 +86,7 @@ class User extends Authenticatable
   {
     $companyIds = $this->threads()->pluck('company_id');
 
-    return Company::whereIn('id', $companyIds);
+
+    return Company::whereIn('id', $companyIds->unique());
   }
 }
