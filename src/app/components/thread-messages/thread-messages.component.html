@@ -1,8 +1,9 @@
 <div class="messages">
   <ul *ngFor="let message of messages">
     <li *ngIf="currentUser.id == message.user_id" class="replies">
+
       <img src="{{message.user.avatar}}" alt="{{message.user.name}}">
-      <p>{{message.body}}</p>
+      <p><span class="user-you">You:</span> {{message.body}}</p>
     </li>
     <li *ngIf="currentUser.id != message.user_id" class="sent">
       <img src="{{message.user.avatar}}" alt="{{message.user.name}}">

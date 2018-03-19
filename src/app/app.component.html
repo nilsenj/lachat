@@ -1,5 +1,5 @@
 <app-navigation class="navbar navbar-expand-lg navbar-dark navbar-fixed-top fixed-top bg-primary"
                 [(userChange)]="userChange"></app-navigation>
 <div class="container-fluid">
-    <router-outlet></router-outlet>
+  <router-outlet (userChange)="userChange"></router-outlet>
 </div>

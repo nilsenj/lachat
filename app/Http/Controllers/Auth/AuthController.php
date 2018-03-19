@@ -73,6 +73,7 @@ class AuthController extends Controller
             $meta = [];
 
             $data['name'] = $request->user()->name;
+            $data['id'] = $request->user()->id;
             $meta['token'] = $token;
 
             return response()->json([

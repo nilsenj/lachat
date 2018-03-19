@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ThreadService} from "../../services/thread.service";
 
 @Component({
@@ -7,6 +7,7 @@ import {ThreadService} from "../../services/thread.service";
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
+  @Input('userChange') userChange;
 
   constructor(threadService: ThreadService) {
     threadService.activeThreadStatus.subscribe((id) => {
