@@ -35,6 +35,8 @@ import {MessagesService} from "./services/messages.service";
 import {ControlMessagesComponent} from './components/control-messages/control-messages.component';
 import {ValidationService} from "./services/validation.service";
 import {AngularFontAwesomeModule} from "angular-font-awesome";
+import { BypassSecurityComponent } from './components/bypass-security/bypass-security.component';
+import { SafePipePipe } from './pipes/safe-pipe.pipe';
 
 @NgModule({
     declarations: [
@@ -57,7 +59,9 @@ import {AngularFontAwesomeModule} from "angular-font-awesome";
         PipeThreadsPipe,
         ThreadMessagesComponent,
         ThreadMessageInputComponent,
-        ControlMessagesComponent
+        ControlMessagesComponent,
+        BypassSecurityComponent,
+        SafePipePipe
     ],
     imports: [
         BrowserModule,

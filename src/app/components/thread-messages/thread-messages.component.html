@@ -1,13 +1,16 @@
 <div #content class="messages" id="messages-elem">
   <ul #messages *ngFor="let message of messages">
     <li *ngIf="currentUser.id == message.user_id" class="replies">
-
       <img src="{{message.user.avatar}}" alt="{{message.user.name}}">
-      <p class="msg-body"><span class="user-you">You:</span> {{message.body}}</p>
+      <div class="msg-body" ><span class="user-you">You:</span>
+        <p id="msg-{{message.id}}" [innerHTML]="message.body | safePipe:'html'"></p>
+      </div>
     </li>
     <li *ngIf="currentUser.id != message.user_id" class="sent">
       <img src="{{message.user.avatar}}" alt="{{message.user.name}}">
-      <p>{{message.body}}</p>
+      <div class="msg-body">
+        <p id="msg-{{message.id}}" [innerHTML]="message.body | safePipe:'html'"></p>
+      </div>
     </li>
   </ul>
 </div>

@@ -13,7 +13,6 @@ import {Company} from "../../models/Company";
 })
 export class CompanyComponent implements OnInit {
 
-
   public activeThreadId: number | string;
   public thread;
   public companies: any = [Company];
