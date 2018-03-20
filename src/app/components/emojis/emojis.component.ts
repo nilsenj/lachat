@@ -28,10 +28,10 @@ export class EmojisComponent implements OnInit {
 
   selectIcon(event: any) {
     event.preventDefault();
-    if ($('.' + event.target.className.split(' ')[1]).length > 1) {
-      this.selectedIcon = $('.' + event.target.className.split(' ')[1]).eq(1).data('name');
+    if ($('.icon-list  .' + event.target.className.split(' ')[1]).length > 1) {
+      this.selectedIcon = $('.icon-list .' + event.target.className.split(' ')[1]).eq(1).data('name');
     } else {
-      this.selectedIcon = $('.' + event.target.className.split(' ')[1]).data('name');
+      this.selectedIcon = $('.icon-list .' + event.target.className.split(' ')[1]).data('name');
     }
     this.triggerSelectedIcon.emit(this.selectedIcon);
   }

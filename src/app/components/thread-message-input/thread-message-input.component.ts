@@ -136,8 +136,10 @@ export class ThreadMessageInputComponent implements OnInit {
    * @param {string} icon
    */
   iconChanged(icon: string) {
-    this.selectedIcon = icon;
-    this.model.msg = this.model.msg + ':' + icon.trim() + ':';
+    if(icon) {
+      this.selectedIcon = icon;
+      this.model.msg = this.model.msg + ':' + icon.trim() + ':';
+    }
   }
 
   /**
