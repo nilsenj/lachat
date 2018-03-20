@@ -1,4 +1,5 @@
-<app-emojis [(visibleEmoji)]="visibleEmojis"></app-emojis>
+<app-emojis [(visibleEmoji)]="visibleEmojis" [(selectedIcon)]="selectedIcon"
+            (triggerSelectedIcon)="iconChanged($event)"></app-emojis>
 <form class="wrap-message" *ngIf="model" [formGroup]="msgForm" role="form" name="form"
       (ngSubmit)="msgForm.valid && send()" novalidate>
     <app-control-messages [control]="msgForm.controls.msg"></app-control-messages>

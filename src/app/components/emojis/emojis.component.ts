@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-emojis',
@@ -6,11 +7,19 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./emojis.component.scss']
 })
 export class EmojisComponent implements OnInit {
-  @Input() visibleEmoji: boolean = false;
-
-  constructor() { }
+  @Input() public visibleEmoji: boolean = false;
+  @Input('selectedIcon') public selectedIcon: string = '';
+  @Output('triggerSelectedIcon') triggerSelectedIcon = new EventEmitter();
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
+  selectIcon(event: any) {
+    event.preventDefault();
+    console.log('hello here');
+    this.selectedIcon = $('.' + event.target.className.split(' ')[1]).data('name');
+    this.triggerSelectedIcon.emit(this.selectedIcon);
+  }
 }
