@@ -19,7 +19,6 @@ import github from 'embed-plugin-github';
 import facebook from 'embed-plugin-facebook';
 import youtube from 'embed-plugin-youtube';
 import map from 'embed-plugin-map';
-import basic from 'embed-preset-basic';
 import noEmbed from "embed-plugin-noembed"
 import highlight from "embed-plugin-highlight"
 
@@ -32,7 +31,7 @@ export class ThreadMessagesComponent implements OnInit {
   @Input('thread') thread: Thread;
   public messages: Message[];
   public currentUser: any = {};
-
+  public msgLoadCounter: number = 0;
   /**
    *
    * @param {ThreadService} threadService
@@ -46,6 +45,7 @@ export class ThreadMessagesComponent implements OnInit {
     this.messagesService.activeMessageStatus.subscribe((message) => {
       console.log('messages load!');
       if (message) {
+        this.embedBody(message);
         this.messages.push(message);
       }
     });
@@ -88,7 +88,8 @@ export class ThreadMessagesComponent implements OnInit {
   embedBody(msg: Message) {
     $(document).ready(() => {
       let x = new EmbedJS({
-        input: msg.body,
+        // input: msg.body,
+        input: document.getElementById('msg-'+msg.id),
         highlightCode: true,
         plugins: [
           map(),
@@ -107,9 +108,8 @@ export class ThreadMessagesComponent implements OnInit {
           })
         ]
       });
-      // x.render($('#msg-'+id));//Get the resulting string
+      x.render();
       x.text().then(({result}) => {
-        console.log(result); //The resulting string
         msg.body = result;
       });
     });
