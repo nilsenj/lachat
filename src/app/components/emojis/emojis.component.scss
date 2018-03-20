@@ -1,0 +1,29 @@
+.icon-list {
+  position: fixed;
+  bottom: 0;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0 0 50px 0;
+  background: whitesmoke;
+  height: 500px;
+  width: 600px;
+  overflow: scroll;
+  & > li {
+    display: inline-block;
+    border: 1px solid rgba(0, 0, 0, 0.21);
+    text-align: center;
+    margin: 5px 5px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.18);
+    font-size: 18px;
+    cursor: pointer;
+    & > a {
+      color: #444;
+      text-decoration: none;
+      height: 35px;
+      display: inline-block;
+      vertical-align: middle;
+      padding-top: 6px;
+      width: 40px;
+    }
+  }
+}

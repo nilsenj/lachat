@@ -1,7 +1,8 @@
+<app-emojis [(visibleEmoji)]="visibleEmojis"></app-emojis>
 <form class="wrap-message" *ngIf="model" [formGroup]="msgForm" role="form" name="form"
       (ngSubmit)="msgForm.valid && send()" novalidate>
     <app-control-messages [control]="msgForm.controls.msg"></app-control-messages>
-    <fa name="smile-o" animation="spin" class="fa-lg smiles-icon" aria-hidden="true"></fa>
+    <fa name="smile-o" (click)="triggerEmojis()" animation="spin" class="fa-lg smiles-icon" aria-hidden="true"></fa>
     <fa name="microphone" class="fa-lg microphone-icon" aria-hidden="true"></fa>
     <div class="form-group message"
          [ngClass]="{ 'has-error': msgForm.submitted && !msg.valid }">

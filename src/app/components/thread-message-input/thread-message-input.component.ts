@@ -19,6 +19,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class ThreadMessageInputComponent implements OnInit {
     @Input('thread') thread: Thread;
     @Input() public msgForm: FormGroup;
+    public visibleEmojis: boolean = false;
     public model: any = {};
     loading = false;
     error = '';
@@ -82,5 +83,13 @@ export class ThreadMessageInputComponent implements OnInit {
             }
         }
         this.loading = false;
+    }
+
+    triggerEmojis() {
+      if(this.visibleEmojis) {
+        this.visibleEmojis = false;
+      } else {
+        this.visibleEmojis = true;
+      }
     }
 }

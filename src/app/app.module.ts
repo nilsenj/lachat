@@ -37,6 +37,7 @@ import {ValidationService} from "./services/validation.service";
 import {AngularFontAwesomeModule} from "angular-font-awesome";
 import { BypassSecurityComponent } from './components/bypass-security/bypass-security.component';
 import { SafePipePipe } from './pipes/safe-pipe.pipe';
+import { EmojisComponent } from './components/emojis/emojis.component';
 
 @NgModule({
     declarations: [
@@ -61,7 +62,8 @@ import { SafePipePipe } from './pipes/safe-pipe.pipe';
         ThreadMessageInputComponent,
         ControlMessagesComponent,
         BypassSecurityComponent,
-        SafePipePipe
+        SafePipePipe,
+        EmojisComponent
     ],
     imports: [
         BrowserModule,
