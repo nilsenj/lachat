@@ -20,6 +20,8 @@ import facebook from 'embed-plugin-facebook';
 import youtube from 'embed-plugin-youtube';
 import map from 'embed-plugin-map';
 import basic from 'embed-preset-basic';
+import noEmbed from "embed-plugin-noembed"
+import highlight from "embed-plugin-highlight"
 
 @Component({
   selector: 'app-thread-messages',
@@ -87,25 +89,22 @@ export class ThreadMessagesComponent implements OnInit {
     $(document).ready(() => {
       let x = new EmbedJS({
         input: msg.body,
-        highlightCode:true,
-        // preset: basic({
-        //   gAuthKey: 'AIzaSyA9cKEIcRyFkNYmHW468LbhTFAFVqMihUQ', // will be automatically passed to all plugins requiring it.
-        //   exclude: ['url'], // plugins that you don't want to use.
-        // })
+        highlightCode: true,
         plugins: [
-          emoji(),
-          twitter(),
-          // url(),
-          media(),
-          github(),
-          youtube({
-            height: 400,
-            // This is a mandatory field.
-            gAuthKey: 'AIzaSyA9cKEIcRyFkNYmHW468LbhTFAFVqMihUQ'
-          }),
           map(),
+          url(),
+          emoji(),
+          github(),
+          noEmbed(),
+          highlight(),
+          media(),
+          twitter(),
           instagram(),
-          facebook()
+          facebook({height: 320}),
+          youtube({
+            gAuthKey: 'AIzaSyA9cKEIcRyFkNYmHW468LbhTFAFVqMihUQ', // will be automatically passed to all plugins requiring it.
+            height: 400
+          })
         ]
       });
       // x.render($('#msg-'+id));//Get the resulting string
