@@ -1,4 +1,5 @@
 import {
+  AfterContentInit,
   AfterViewInit,
   Component, ContentChild, ElementRef, Inject, Input, OnInit, QueryList, ViewChild,
   ViewChildren
@@ -27,11 +28,12 @@ import highlight from "embed-plugin-highlight"
   templateUrl: './thread-messages.component.html',
   styleUrls: ['./thread-messages.component.scss']
 })
-export class ThreadMessagesComponent implements OnInit {
+export class ThreadMessagesComponent implements OnInit, AfterContentInit {
   @Input('thread') thread: Thread;
   public messages: Message[];
   public currentUser: any = {};
   public msgLoadCounter: number = 0;
+
   /**
    *
    * @param {ThreadService} threadService
@@ -76,20 +78,27 @@ export class ThreadMessagesComponent implements OnInit {
     this.messagesService.messagesLoadStatus.subscribe(() => {
       $("html").animate({
         scrollTop: $(document).innerHeight()
-      }, 400);
+      }, 10);
     });
     this.messagesService.activeMessageStatus.subscribe(() => {
       $("html").animate({
         scrollTop: $(document).innerHeight()
-      }, 400);
+      }, 10);
     });
   }
 
-  embedBody(msg: Message) {
+  ngAfterContentInit() {
+
+  }
+
+  embedBody(msg
+              :
+              Message
+  ) {
     $(document).ready(() => {
       let x = new EmbedJS({
         // input: msg.body,
-        input: document.getElementById('msg-'+msg.id),
+        input: document.getElementById('msg-' + msg.id),
         highlightCode: true,
         plugins: [
           map(),
@@ -111,6 +120,9 @@ export class ThreadMessagesComponent implements OnInit {
       x.render();
       x.text().then(({result}) => {
         msg.body = result;
+        $("html").animate({
+          scrollTop: $(document).innerHeight()
+        }, 10);
       });
     });
   }
