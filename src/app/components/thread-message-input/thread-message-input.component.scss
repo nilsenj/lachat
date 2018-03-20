@@ -1,3 +1,6 @@
+app-control-messages {
+  position: relative;
+}
 .wrap-message {
   width: 100%;
   height: 60px;
@@ -11,6 +14,16 @@
   i {
     color: #aaaaaa;
     text-align: center;
+  }
+  .smiles-icon {
+    color: #aaaaaa;
+    margin-top: 20px;
+    margin-right: 10px;
+  }
+  .microphone-icon {
+    color: #aaaaaa;
+    margin-top: 20px;
+    margin-right: 10px;
   }
   .message {
     width: 100%;
@@ -30,5 +43,9 @@
   i {
     color: #aaaaaa;
     text-align: center;
+  }
+  .send-btn {
+    margin-top: 10px;
+    margin-left: 10px;
   }
 }
