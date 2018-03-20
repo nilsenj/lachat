@@ -66,6 +66,7 @@ export class ThreadMessageInputComponent implements OnInit {
           if (that.msgForm.valid) {
             that.send();
           }
+          that.model.msg = "";
         }
       }));
     });
