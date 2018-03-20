@@ -25,6 +25,7 @@ export class ThreadMessageInputComponent implements OnInit {
   error = '';
   public selectedIcon: string = "";
   private canSendMsg: boolean;
+  private keys: string;
 
   constructor(private router: Router,
               private threadService: ThreadService,
@@ -94,8 +95,17 @@ export class ThreadMessageInputComponent implements OnInit {
     }
   }
 
+  closeMsg(value: string) { // with type info
+    this.visibleEmojis = false;
+  }
+
   iconChanged(icon: string) {
     this.selectedIcon = icon;
     this.model.msg = this.model.msg + ':' + icon.trim() + ':';
   }
+
+  switchEmoji(emojiStatus) {
+    this.visibleEmojis = emojiStatus;
+  }
+
 }
