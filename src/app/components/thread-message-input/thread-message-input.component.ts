@@ -24,8 +24,7 @@ export class ThreadMessageInputComponent implements OnInit {
   loading = false;
   error = '';
   public selectedIcon: string = "";
-  private canSendMsg: boolean;
-  private keys: string;
+  public canSendMsg: boolean;
 
   constructor(private router: Router,
               private threadService: ThreadService,
@@ -45,6 +44,31 @@ export class ThreadMessageInputComponent implements OnInit {
     } else {
       this.canSendMsg = false;
     }
+    $(document).ready(() => {
+      let that = this;
+      let msg = this.model.msg;
+      let inputHeight = $(".input-message").height();
+      let msgBody = $('.wrap-message').height();
+      let ratio = msgBody/inputHeight;
+      let difference = msgBody - inputHeight;
+
+      $(".input-message").on('keydown', (e => {
+          $('.wrap-message')
+            .css('height', $(e.target).height() + difference);
+      }));
+      $(".input-message").on('keyup', (e => {
+        $('.wrap-message')
+          .css('height', $(e.target).height() + difference);
+        if (e.keyCode == 13 && e.shiftKey) {
+          e.stopPropagation();
+        } else if (e.keyCode == 13) {
+          console.log('msg sent');
+          if (that.msgForm.valid) {
+            that.send();
+          }
+        }
+      }));
+    });
   }
 
   private sendForm(): void {
@@ -87,7 +111,10 @@ export class ThreadMessageInputComponent implements OnInit {
     this.loading = false;
   }
 
-  triggerEmojis() {
+  /**
+   *
+   */
+  triggerEmojis(): void {
     if (this.visibleEmojis) {
       this.visibleEmojis = false;
     } else {
@@ -95,16 +122,28 @@ export class ThreadMessageInputComponent implements OnInit {
     }
   }
 
+  /**
+   *
+   * @param {string} value
+   */
   closeMsg(value: string) { // with type info
     this.visibleEmojis = false;
   }
 
+  /**
+   *
+   * @param {string} icon
+   */
   iconChanged(icon: string) {
     this.selectedIcon = icon;
     this.model.msg = this.model.msg + ':' + icon.trim() + ':';
   }
 
-  switchEmoji(emojiStatus) {
+  /**
+   *
+   * @param {boolean} emojiStatus
+   */
+  switchEmoji(emojiStatus: boolean) {
     this.visibleEmojis = emojiStatus;
   }
 

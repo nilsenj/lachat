@@ -38,6 +38,7 @@ import {AngularFontAwesomeModule} from "angular-font-awesome";
 import { BypassSecurityComponent } from './components/bypass-security/bypass-security.component';
 import { SafePipePipe } from './pipes/safe-pipe.pipe';
 import { EmojisComponent } from './components/emojis/emojis.component';
+import {Autosize} from 'angular2-autosize';
 
 @NgModule({
     declarations: [
@@ -63,7 +64,8 @@ import { EmojisComponent } from './components/emojis/emojis.component';
         ControlMessagesComponent,
         BypassSecurityComponent,
         SafePipePipe,
-        EmojisComponent
+        EmojisComponent,
+        Autosize
     ],
     imports: [
         BrowserModule,

@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
     "angular-font-awesome": "^3.1.2",
+    "angular2-autosize": "^1.0.2",
     "bootstrap": "^4.0.0-beta",
     "core-js": "^2.4.1",
     "embed-js": "^5.0.3",

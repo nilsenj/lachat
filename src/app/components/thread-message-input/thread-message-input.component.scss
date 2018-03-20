@@ -1,11 +1,12 @@
 app-control-messages {
   position: relative;
 }
+
 .wrap-message {
   width: 100%;
-  height: 60px;
+  min-height: 60px;
   background: #f1f1f1;
-  display: flex;
+  display: inline;
   position: fixed;
   bottom: 0;
   right: 0;
@@ -17,28 +18,40 @@ app-control-messages {
   }
   .smiles-icon {
     color: #aaaaaa;
-    margin-top: 20px;
-    margin-right: 10px;
+    padding: 20px 10px;
+    display: inline-block;
+    &:hover {
+      cursor: pointer;
+    }
   }
   .microphone-icon {
     color: #aaaaaa;
-    margin-top: 20px;
-    margin-right: 10px;
+    padding: 20px 10px;
+    display: inline-block;
+    &:hover {
+      cursor: pointer;
+    }
   }
   .message {
-    width: 100%;
     height: 45px;
-    background: #ffffff;
     margin: auto;
-    border: 1px solid #eeeeee;
     border-radius: 5px;
-    display: flex;
+    display: inline-block;
+    width: 90%;
+    padding-top: 10px;
+    float: right;
   }
   .input-message {
-    width: 100%;
     margin: 0px 10px;
     border: none;
     outline: none;
+    display: inline-block;
+    background: #ffffff;
+    border: 1px solid #eeeeee;
+  }
+  .icons-wrap {
+    display: inline-block;
+    width: 10%;
   }
   i {
     color: #aaaaaa;
