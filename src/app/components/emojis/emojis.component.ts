@@ -29,10 +29,14 @@ export class EmojisComponent implements OnInit {
   selectIcon(event: any) {
     event.preventDefault();
     if ($('.icon-list  .' + event.target.className.split(' ')[1]).length > 1) {
-      this.selectedIcon = $('.icon-list .' + event.target.className.split(' ')[1]).eq(1).data('name');
+      let icon = $('.icon-list .' + event.target.className.split(' ')[1]).eq(1).data('name');
+      this.selectedIcon = icon ? icon != 'undefined' ? icon : null : null;
     } else {
-      this.selectedIcon = $('.icon-list .' + event.target.className.split(' ')[1]).data('name');
+      let icon = $('.icon-list .' + event.target.className.split(' ')[1]).data('name');
+      this.selectedIcon = icon ? icon != 'undefined' ? icon : null : null;
     }
-    this.triggerSelectedIcon.emit(this.selectedIcon);
+    if (this.selectedIcon) {
+      this.triggerSelectedIcon.emit(this.selectedIcon);
+    }
   }
 }

@@ -117,12 +117,13 @@ export class ThreadMessagesComponent implements OnInit, AfterContentInit {
           })
         ]
       });
-      x.render();
-      x.text().then(({result}) => {
-        msg.body = result;
+      x.render().then(() => {
         $("html").animate({
           scrollTop: $(document).innerHeight()
         }, 10);
+      });
+      x.text().then(({result}) => {
+        msg.body = result;
       });
     });
   }

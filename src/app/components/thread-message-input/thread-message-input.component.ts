@@ -44,40 +44,7 @@ export class ThreadMessageInputComponent implements OnInit {
     } else {
       this.canSendMsg = false;
     }
-    $(document).ready(() => {
-      let that = this;
-      let msg = this.model.msg;
-      let inputHeight = $(".input-message").height();
-      let msgBody = $('.wrap-message').height();
-      let ratio = msgBody/inputHeight;
-      let difference = msgBody - inputHeight;
-
-      $(".input-message").on('keydown', (e => {
-          $('.wrap-message')
-            .css('height', $(e.target).height() + difference);
-      }));
-      $(".input-message").on('keyup', (e => {
-        $('.wrap-message')
-          .css('height', $(e.target).height() + difference);
-        if (e.keyCode == 13 && e.shiftKey) {
-          e.stopPropagation();
-        } else if (e.keyCode == 13) {
-          console.log('msg sent');
-          if (that.msgForm.valid) {
-            that.send();
-          }
-          that.model.msg = "";
-        }
-      }));
-    });
-  }
-
-  private sendForm(): void {
-    this.msgForm = this.msgBuilder.group({
-      msg: [this.model.msg, [
-        Validators.maxLength(5000)]
-      ]
-    });
+    this.setupMsgEvents();
   }
 
   /**
@@ -136,7 +103,7 @@ export class ThreadMessageInputComponent implements OnInit {
    * @param {string} icon
    */
   iconChanged(icon: string) {
-    if(icon) {
+    if (icon) {
       this.selectedIcon = icon;
       this.model.msg = this.model.msg + ':' + icon.trim() + ':';
     }
@@ -150,4 +117,40 @@ export class ThreadMessageInputComponent implements OnInit {
     this.visibleEmojis = emojiStatus;
   }
 
+  private setupMsgEvents(): void {
+    $(document).ready(() => {
+      let that = this;
+      let msg = this.model.msg;
+      let inputHeight = $(".input-message").height();
+      let msgBody = $('.wrap-message').height();
+      let ratio = msgBody / inputHeight;
+      let difference = msgBody - inputHeight;
+
+      $(".input-message").on('keydown', (e => {
+        $('.wrap-message')
+          .css('height', $(e.target).height() + difference);
+      }));
+      $(".input-message").on('keyup', (e => {
+        $('.wrap-message')
+          .css('height', $(e.target).height() + difference);
+        if (e.keyCode == 13 && e.shiftKey) {
+          e.stopPropagation();
+        } else if (e.keyCode == 13) {
+          console.log('msg sent');
+          if (that.msgForm.valid) {
+            that.send();
+          }
+          that.model.msg = "";
+        }
+      }));
+    });
+  }
+
+  private sendForm(): void {
+    this.msgForm = this.msgBuilder.group({
+      msg: [this.model.msg, [
+        Validators.maxLength(5000)]
+      ]
+    });
+  }
 }
