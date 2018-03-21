@@ -64,6 +64,7 @@ export class ThreadMessageInputComponent implements OnInit {
               this.toastrService.add('info', 'Message Sent!');
               this.loading = false;
               this.model = {};
+              $(".input-message").trigger('keyup');
             } else {
               this.error = 'Message is not sent';
               this.loading = false;
@@ -92,9 +93,8 @@ export class ThreadMessageInputComponent implements OnInit {
 
   /**
    *
-   * @param {string} value
    */
-  closeMsg(value: string) { // with type info
+  closeMsg() { // with type info
     this.visibleEmojis = false;
   }
 
@@ -103,9 +103,13 @@ export class ThreadMessageInputComponent implements OnInit {
    * @param {string} icon
    */
   iconChanged(icon: string) {
-    if (icon) {
+    if (icon && typeof icon !== 'undefined' && icon != undefined && icon != 'undefined') {
       this.selectedIcon = icon;
+      if (!this.model.msg) {
+        this.model.msg = '';
+      }
       this.model.msg = this.model.msg + ':' + icon.trim() + ':';
+      $('.input-message').trigger('focus');
     }
   }
 
@@ -126,6 +130,11 @@ export class ThreadMessageInputComponent implements OnInit {
       let ratio = msgBody / inputHeight;
       let difference = msgBody - inputHeight;
 
+      $(".input-message").on('focus', (e) => {
+        this.setCaretAtEnd($(".input-message"));
+        $('.wrap-message')
+          .css('height', $(e.target).height() + difference);
+      });
       $(".input-message").on('keydown', (e => {
         $('.wrap-message')
           .css('height', $(e.target).height() + difference);
@@ -139,11 +148,18 @@ export class ThreadMessageInputComponent implements OnInit {
           console.log('msg sent');
           if (that.msgForm.valid) {
             that.send();
+            $(".input-message").trigger('focus');
+            this.closeMsg()
           }
           that.model.msg = "";
         }
       }));
     });
+  }
+
+  private setCaretAtEnd(elem) {
+    let $thisVal = elem.val();
+    elem.val('').val($thisVal);
   }
 
   private sendForm(): void {
