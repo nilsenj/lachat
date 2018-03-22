@@ -1,12 +1,18 @@
 <div #content class="messages" id="messages-elem">
   <ul #messages *ngFor="let message of messages">
     <li *ngIf="currentUser.id == message.user_id" class="replies">
+      <a class="text-muted">{{message.created_at}}
+        <fa name="clock-o"></fa>
+      </a>
       <img src="{{message.user.avatar}}" alt="{{message.user.name}}">
-      <div class="msg-body" ><span class="user-you">You:</span>
+      <div class="msg-body"><span class="user-you">You:</span>
         <p id="msg-{{message.id}}" [innerHTML]="message.body | safePipe:'html'"></p>
       </div>
     </li>
     <li *ngIf="currentUser.id != message.user_id" class="sent">
+      <a class="text-muted">{{message.created_at}}
+        <fa name="clock-o"></fa>
+      </a>
       <img src="{{message.user.avatar}}" alt="{{message.user.name}}">
       <div class="msg-body">
         <p id="msg-{{message.id}}" [innerHTML]="message.body | safePipe:'html'"></p>

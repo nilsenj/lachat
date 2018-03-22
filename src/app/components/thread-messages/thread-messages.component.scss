@@ -2,18 +2,22 @@
   height: 100%;
   width: 60%;
   padding-left: 10%;
-  margin-bottom: 120px;
   margin-top: 60px;
   background: white;
   display: block;
+  transform: rotate(180deg);
   ul li {
     display: inline-block;
     clear: both;
     float: left;
     margin: 15px 15px 5px 15px;
     width: calc(100% - 25px);
-    font-size: 0.9em;
+    font-size: 1em;
     position: relative;
+    transform: rotate(180deg);
+    .ec {
+      font-size: 18px;
+    }
     &.sent img {
       margin: 6px 8px 0 0;
     }
@@ -59,6 +63,9 @@
       word-wrap: break-word;
     }
   }
+  .ec {
+    font-size: 18px !important;
+  }
   @media screen and (max-width: 735px) {
     ul li p {
       max-width: 500px;
@@ -90,4 +97,8 @@
     width: 70%;
     padding-left: 0;
   }
+}
+
+.ec {
+  font-size: 18px !important;
 }

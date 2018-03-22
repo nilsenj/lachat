@@ -45,7 +45,6 @@ export class ThreadMessagesComponent implements OnInit, AfterContentInit {
               private authenticationService: AuthenticationService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.messagesService.activeMessageStatus.subscribe((message) => {
-      console.log('messages load!');
       if (message) {
         this.embedBody(message);
         this.messages.push(message);
@@ -56,11 +55,11 @@ export class ThreadMessagesComponent implements OnInit, AfterContentInit {
   ngOnInit(): void {
     if (this.thread) {
       this.messagesService.getMessages(this.thread.id).subscribe((messages) => {
-        this.messages = messages;
-        this.messagesService.messagesLoadStatus.emit(messages);
         messages.forEach((msg) => {
           this.embedBody(msg);
         });
+        this.messages = messages;
+        this.messagesService.messagesLoadStatus.emit(messages);
       });
     }
     this.threadService.activeThreadStatus.subscribe((thread) => {
@@ -76,14 +75,14 @@ export class ThreadMessagesComponent implements OnInit, AfterContentInit {
       }
     });
     this.messagesService.messagesLoadStatus.subscribe(() => {
-      $("html").animate({
-        scrollTop: $(document).innerHeight()
-      }, 10);
+      $(window).ready(() => {
+        this.jumpToBottom($("#messages-elem"));
+      });
     });
     this.messagesService.activeMessageStatus.subscribe(() => {
-      $("html").animate({
-        scrollTop: $(document).innerHeight()
-      }, 10);
+      $(window).ready(() => {
+        this.jumpToBottom($("#messages-elem"));
+      });
     });
   }
 
@@ -91,10 +90,7 @@ export class ThreadMessagesComponent implements OnInit, AfterContentInit {
 
   }
 
-  embedBody(msg
-              :
-              Message
-  ) {
+  embedBody(msg: Message) {
     $(document).ready(() => {
       let x = new EmbedJS({
         // input: msg.body,
@@ -118,13 +114,25 @@ export class ThreadMessagesComponent implements OnInit, AfterContentInit {
         ]
       });
       x.render().then(() => {
-        $("html").animate({
-          scrollTop: $(document).innerHeight()
-        }, 10);
+        $(window).ready(() => {
+          this.jumpToBottom($("#messages-elem"));
+        });
       });
       x.text().then(({result}) => {
         msg.body = result;
       });
+    });
+  }
+
+  jumpToBottom(elementOrSelector) {
+    $(document).ready(function () {
+      $(document).scrollTop(
+        //This will find the top position of element
+        $(elementOrSelector).offset().top
+        +
+        //This will find the outer height of element
+        $(elementOrSelector).outerHeight()
+      );
     });
   }
 }

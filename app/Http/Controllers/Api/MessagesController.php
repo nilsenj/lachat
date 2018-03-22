@@ -33,9 +33,9 @@ class MessagesController extends Controller
         $userId = $request->user()->id;
 //        $users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
         $thread->markAsRead($userId);
-        $thread->load(['messages']);
-        $thread->messages->load('user');
-        return response()->json($thread->messages);
+        $messages = $thread->messages()->orderBy('created_at', 'DESC')->with('user')->get();
+
+        return response()->json($messages);
     }
 
     /**

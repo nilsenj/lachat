@@ -127,25 +127,20 @@ export class ThreadMessageInputComponent implements OnInit {
       let msg = this.model.msg;
       let inputHeight = $(".input-message").height();
       let msgBody = $('.wrap-message').height();
-      let ratio = msgBody / inputHeight;
       let difference = msgBody - inputHeight;
 
       $(".input-message").on('focus', (e) => {
         this.setCaretAtEnd($(".input-message"));
-        $('.wrap-message')
-          .css('height', $(e.target).height() + difference);
+        this.setInputWrapperAlignment($(e.target), difference);
       });
       $(".input-message").on('keydown', (e => {
-        $('.wrap-message')
-          .css('height', $(e.target).height() + difference);
+        this.setInputWrapperAlignment($(e.target), difference);
       }));
       $(".input-message").on('keyup', (e => {
-        $('.wrap-message')
-          .css('height', $(e.target).height() + difference);
+        this.setInputWrapperAlignment($(e.target), difference);
         if (e.keyCode == 13 && e.shiftKey) {
           e.stopPropagation();
         } else if (e.keyCode == 13) {
-          console.log('msg sent');
           if (that.msgForm.valid) {
             that.send();
             $(".input-message").trigger('focus');
@@ -155,6 +150,16 @@ export class ThreadMessageInputComponent implements OnInit {
         }
       }));
     });
+  }
+
+  /**
+   *
+   * @param elem
+   * @param difference
+   */
+  private setInputWrapperAlignment(elem, difference): void {
+    $('.wrap-message')
+      .css('height', elem.height() + difference);
   }
 
   private setCaretAtEnd(elem) {
