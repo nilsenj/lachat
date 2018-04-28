@@ -9,9 +9,11 @@ import {ThreadService} from "../../services/thread.service";
 import {MessagesService} from "../../services/messages.service";
 import {Message} from "../../models/Message";
 import {AuthenticationService} from "../../services/authentication.service";
-
+import kebab from "just-kebab-case";
 import EmbedJS from 'embed-js';
 import url from 'embed-plugin-url';
+
+// import emoji from '../emojis/emojis.plugin';
 import emoji from 'embed-plugin-emoji';
 import media from 'embed-plugin-media';
 import twitter from 'embed-plugin-twitter';
@@ -47,7 +49,7 @@ export class ThreadMessagesComponent implements OnInit, AfterContentInit {
     this.messagesService.activeMessageStatus.subscribe((message) => {
       if (message) {
         this.embedBody(message);
-        this.messages.push(message);
+        this.messages.unshift(message);
       }
     });
   }
@@ -99,7 +101,11 @@ export class ThreadMessagesComponent implements OnInit, AfterContentInit {
         plugins: [
           map(),
           url(),
-          emoji(),
+          emoji({
+            template(emojiName) {
+              return `<span class="gl gl-${kebab(emojiName)}"></span>`
+            }
+          }),
           github(),
           noEmbed(),
           highlight(),
