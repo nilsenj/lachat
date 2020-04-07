@@ -5,5 +5,6 @@ export class Message {
   body: string;
   created_at: string;
   updated_at: string;
+  updated: string;
   deleted_at?: string;
 }

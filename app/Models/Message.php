@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -38,6 +39,10 @@ class Message extends Eloquent
    * @var array
    */
   protected $dates = ['deleted_at'];
+
+  protected $appends = [
+    'updated'
+  ];
 
   /**
    * {@inheritDoc}
@@ -93,6 +98,11 @@ class Message extends Eloquent
   public function recipients()
   {
     return $this->participants()->where('user_id', '!=', $this->user_id);
+  }
+
+  public function getUpdatedAttribute()
+  {
+    return (new Carbon($this->attributes['updated_at']))->diffForHumans();
   }
 
   /**

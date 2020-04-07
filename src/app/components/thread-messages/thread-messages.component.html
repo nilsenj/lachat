@@ -1,21 +1,29 @@
 <div #content class="messages" id="messages-elem">
   <ul #messages *ngFor="let message of messages">
-    <li *ngIf="currentUser.id == message.user_id" class="replies">
-      <a class="text-muted">{{message.created_at}}
-        <fa name="clock-o"></fa>
-      </a>
-      <img src="{{message.user.avatar}}" alt="{{message.user.name}}">
-      <div class="msg-body"><span class="user-you">You:</span>
-        <p id="msg-{{message.id}}" [innerHTML]="message.body | safePipe:'html'"></p>
+    <li *ngIf="currentUser?.id == message?.user_id" class="replies">
+      <div class="inline-block">
+        <span class="user-you">You:</span>
+        <img src="{{message?.user?.avatar}}" alt="{{message?.user?.name}}">
+        <a class="text-muted time">{{message?.updated}}
+          <fa name="clock-o"></fa>
+        </a>
+      </div>
+      <div class="clearfix"></div>
+      <div class="msg-body">
+        <p id="msg-{{message?.id}}" [innerHTML]="message?.body | safePipe:'html'"></p>
       </div>
     </li>
-    <li *ngIf="currentUser.id != message.user_id" class="sent">
-      <a class="text-muted">{{message.created_at}}
-        <fa name="clock-o"></fa>
-      </a>
-      <img src="{{message.user.avatar}}" alt="{{message.user.name}}">
+    <li *ngIf="currentUser.id != message?.user_id" class="sent">
+      <div class="inline-block">
+        <span class="user-you">{{message?.user?.name}}:</span>
+        <img src="{{message?.user?.avatar}}" alt="{{message?.user?.name}}">
+        <a class="text-muted time">{{message?.updated}}
+          <fa name="clock-o"></fa>
+        </a>
+      </div>
+      <div class="clearfix"></div>
       <div class="msg-body">
-        <p id="msg-{{message.id}}" [innerHTML]="message.body | safePipe:'html'"></p>
+        <p id="msg-{{message?.id}}" [innerHTML]="message?.body | safePipe:'html'"></p>
       </div>
     </li>
   </ul>
