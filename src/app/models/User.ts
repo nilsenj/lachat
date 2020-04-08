@@ -1,3 +1,5 @@
+import {Role} from "./Role";
+
 export class User {
   name: string;
   avatar: string;
@@ -5,4 +7,6 @@ export class User {
   created_at: string;
   deleted_at: string;
   email: string;
+  role?: Role;
+  roles?: Role[];
 }

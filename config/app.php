@@ -181,6 +181,8 @@ return [
     \Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
     \App\Providers\ChatServiceProvider::class,
     Laravolt\Avatar\ServiceProvider::class,
+    \Zizaco\Entrust\EntrustServiceProvider::class,
+    \Awobaz\Compoships\ComposhipsServiceProvider::class,
   ],
 
   /*
@@ -231,7 +233,7 @@ return [
     'View' => Illuminate\Support\Facades\View::class,
     'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
     'Avatar' => Laravolt\Avatar\Facade::class,
-
+    'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
   ],
 
 ];

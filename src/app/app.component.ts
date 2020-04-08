@@ -1,9 +1,8 @@
 import {Component, EventEmitter, OnInit, Output, ViewContainerRef} from '@angular/core';
 import {AuthenticationService} from "./services/authentication.service";
-import {User} from "./models/User";
-import {arrays} from "./helpers/arrays";
 import {ToastsManager} from "ng2-toastr";
 import {ToastrEvent, ToastrService} from "./services/toastr.service";
+import SimpleScrollbar from 'simple-scrollbar';
 
 @Component({
   selector: 'app-root',
@@ -53,6 +52,7 @@ export class AppComponent implements OnInit {
     // get users from secure api end point
     this.getUser();
     this.userChanged();
+    SimpleScrollbar.initAll();
   }
 
   userChanged(): void {

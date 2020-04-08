@@ -2,8 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Thread;
-use Carbon\Carbon;
+use App\User;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,6 +15,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         \Schema::defaultStringLength(191);
+        User::created(function(User $user) {
+          if (!$user->profile()->count()) {
+            $user->profile()->create([]);
+          }
+        });
     }
 
     /**

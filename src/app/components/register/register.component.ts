@@ -10,7 +10,9 @@ import {ToastrService} from "../../services/toastr.service";
 })
 export class RegisterComponent implements OnInit {
 
-    model: any = {};
+    model: any = {
+      role: true
+    };
     loading = false;
     error = '';
 
@@ -35,7 +37,8 @@ export class RegisterComponent implements OnInit {
             this.model.name,
             this.model.email,
             this.model.password,
-            this.model.confirm)
+            this.model.confirm,
+            this.model.role)
             .subscribe(result => {
                 if (result === true) {
                     this.router.navigate(['/']);

@@ -1,0 +1,120 @@
+.collapse.in {
+  display: block !important;
+}
+
+li.nav-link {
+  padding-bottom: 10px !important;
+  display: inline-block;
+  position: relative;
+  line-height: 1;
+  margin-bottom: 10px;
+  width: 100%;
+  img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    overflow: hidden;
+    vertical-align: top;
+    display: inline-block;
+  }
+
+  .latest-message {
+    font-weight: normal !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(97% - 40px);
+    display: inline-block;
+    margin-left: 5px;
+    .role {
+      font-weight: normal;
+      color: darkgrey;
+      margin-right: 8px;
+      font-size: 10px;
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  .user {
+    margin-top: 8px;
+    display: inline-block;
+  }
+}
+
+li.nav-link.active {
+  background: #6490b1 !important;
+
+  .thread-name {
+    color: #fff !important;
+  }
+
+  .latest-message .user {
+    color: #fff !important;
+  }
+}
+
+li.nav-link.text-white {
+  color: white !important;
+  display: inline-block;
+  position: relative;
+  padding: 0;
+  line-height: 1;
+  margin-bottom: 10px;
+
+  .thread-name {
+    width: 100%;
+    line-height: 1;
+    padding-top: 10px;
+    padding-left: 10px;
+  }
+
+  i {
+    width: 20%;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    text-align: right;
+  }
+
+  &:hover {
+    cursor: pointer;
+    outline: none;
+    color: white !important;
+  }
+
+  &.active {
+    color: white !important;
+    outline: none;
+  }
+
+  div {
+    outline: none;
+  }
+}
+
+.thread-name {
+  color: black;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.threads-list-toggle {
+  background: transparent;
+  outline: none;
+  border: none;
+  font-weight: 600;
+  color: white;
+  border-bottom: 1px solid;
+  padding-left: 20px;
+  width: 100%;
+  text-align: left;
+}
+
+.threads-list-container {
+  position: relative;
+  display: block;
+}
+
+.threads-list {
+}

@@ -22,7 +22,7 @@ import {ChatSidebarComponent} from './components/chat-sidebar/chat-sidebar.compo
 import {ChatContentComponent} from './components/chat-content/chat-content.component';
 import {RedirectIfLoggedInGuard} from "./guards/redirect-if-logged-in.guard";
 import {CreateMessageComponent} from './components/create-message/create-message.component';
-import {CompanyComponent} from './components/company/company.component';
+import {ThreadsComponent} from './components/threads/threads.component';
 import {CompanyService} from "./services/company.service";
 import {ThreadService} from "./services/thread.service";
 import {CompanyThreadComponent} from './components/company-thread/company-thread.component';
@@ -35,60 +35,62 @@ import {MessagesService} from "./services/messages.service";
 import {ControlMessagesComponent} from './components/control-messages/control-messages.component';
 import {ValidationService} from "./services/validation.service";
 import {AngularFontAwesomeModule} from "angular-font-awesome";
-import { BypassSecurityComponent } from './components/bypass-security/bypass-security.component';
-import { SafePipePipe } from './pipes/safe-pipe.pipe';
-import { EmojisComponent } from './components/emojis/emojis.component';
+import {BypassSecurityComponent} from './components/bypass-security/bypass-security.component';
+import {SafePipePipe} from './pipes/safe-pipe.pipe';
+import {EmojisComponent} from './components/emojis/emojis.component';
 import {Autosize} from 'angular2-autosize';
+import {ProfileService} from "./services/profile.service";
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        RegisterComponent,
-        LoginComponent,
-        WelcomeComponent,
-        NavigationComponent,
-        UserComponent,
-        ChatComponent,
-        MessageComponent,
-        UserInfoComponent,
-        ChatSidebarComponent,
-        ChatContentComponent,
-        CreateMessageComponent,
-        CompanyComponent,
-        CompanyThreadComponent,
-        ThreadComponent,
-        ChatInnerComponent,
-        PipeThreadsPipe,
-        ThreadMessagesComponent,
-        ThreadMessageInputComponent,
-        ControlMessagesComponent,
-        BypassSecurityComponent,
-        SafePipePipe,
-        EmojisComponent,
-        Autosize
-    ],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        HttpModule,
-        AppRouterModule,
-        BrowserAnimationsModule,
-        ReactiveFormsModule,
-        AngularFontAwesomeModule,
-        ToastModule.forRoot()
-    ],
-    providers: [
-        AuthenticationService,
-        AuthGuard,
-        ToastrService,
-        RedirectIfLoggedInGuard,
-        CompanyService,
-        ThreadService,
-        MessagesService,
-        ValidationService,
-        {provide: ToastOptions, useClass: CustomToastr},
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    RegisterComponent,
+    LoginComponent,
+    WelcomeComponent,
+    NavigationComponent,
+    UserComponent,
+    ChatComponent,
+    MessageComponent,
+    UserInfoComponent,
+    ChatSidebarComponent,
+    ChatContentComponent,
+    CreateMessageComponent,
+    ThreadsComponent,
+    CompanyThreadComponent,
+    ThreadComponent,
+    ChatInnerComponent,
+    PipeThreadsPipe,
+    ThreadMessagesComponent,
+    ThreadMessageInputComponent,
+    ControlMessagesComponent,
+    BypassSecurityComponent,
+    SafePipePipe,
+    EmojisComponent,
+    Autosize
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    AppRouterModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    AngularFontAwesomeModule,
+    ToastModule.forRoot()
+  ],
+  providers: [
+    AuthenticationService,
+    ProfileService,
+    AuthGuard,
+    ToastrService,
+    RedirectIfLoggedInGuard,
+    CompanyService,
+    ThreadService,
+    MessagesService,
+    ValidationService,
+    {provide: ToastOptions, useClass: CustomToastr},
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

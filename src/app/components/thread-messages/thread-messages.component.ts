@@ -12,8 +12,6 @@ import {AuthenticationService} from "../../services/authentication.service";
 import kebab from "just-kebab-case";
 import EmbedJS from 'embed-js';
 import url from 'embed-plugin-url';
-
-// import emoji from '../emojis/emojis.plugin';
 import emoji from 'embed-plugin-emoji';
 import media from 'embed-plugin-media';
 import twitter from 'embed-plugin-twitter';
@@ -22,8 +20,8 @@ import github from 'embed-plugin-github';
 import facebook from 'embed-plugin-facebook';
 import youtube from 'embed-plugin-youtube';
 import map from 'embed-plugin-map';
-import noEmbed from "embed-plugin-noembed"
-import highlight from "embed-plugin-highlight"
+import noEmbed from "embed-plugin-noembed";
+import highlight from "embed-plugin-highlight";
 
 @Component({
   selector: 'app-thread-messages',
@@ -34,7 +32,7 @@ export class ThreadMessagesComponent implements OnInit, AfterContentInit {
   @Input('thread') thread: Thread;
   public messages: Message[];
   public currentUser: any = {};
-  public msgLoadCounter: number = 0;
+  public msgLoadCounter = 0;
 
   /**
    *

@@ -1,0 +1,20 @@
+<span class="threads-list-container">
+<ul *ngFor="let item of threads | pipeThreads: 'date'; let i = index" data-toggle="collapse"
+    [attr.data-target]="'#threads-'+item.id"
+    class="nav nav-pills flex-column threads-list">
+  <li
+    *ngIf="item?.participants"
+    [class]="(threadId == item.id) ? 'nav-link text-white active' : 'nav-link text-white'"
+    [routerLink]="['/chat/threads/' + item.id]">
+    <div class="thread-name" [routerLink]="['/chat/threads/'+item.id]">
+      <img src="{{getParticipant(item?.participants)?.user?.avatar}}"
+           alt="{{getParticipant(item?.participants)?.user?.name}}">
+      <span class="latest-message">
+        <span class="role">{{getParticipant(item?.participants)?.user?.roles[0]?.name}}</span>
+        <div class="font-weight-bold">{{getThreadName(item)}}</div>
+        <span class="text-primary user">{{item?.latest_message?.user?.name}}
+          : </span>{{item?.latest_message?.body.substring(0, 50)}}</span>
+    </div>
+  </li>
+</ul>
+</span>

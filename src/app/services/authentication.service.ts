@@ -9,8 +9,6 @@ import {ToastrService} from "./toastr.service";
 
 @Injectable()
 export class AuthenticationService {
-
-
   /**
    *token field
    */
@@ -116,18 +114,19 @@ export class AuthenticationService {
   /**
    * register this user
    *
-   * @param {string} name
-   * @param {string} email
-   * @param {string} password
-   * @param {string} confirm
-   * @returns {Observable<boolean>}
+   * @param name
+   * @param email
+   * @param password
+   * @param confirm
+   * @param role
    */
-  register(name: string, email: string, password: string, confirm: string): Observable<boolean> {
+  register(name: string, email: string, password: string, confirm: string, role: boolean): Observable<boolean> {
     return this.http.post(app.api_url + '/api/register', {
       name: name,
       email: email,
       password: password,
-      password_confirmation: confirm
+      password_confirmation: confirm,
+      role: role
     })
       .map((response: Response) => {
         // register successful if there's a jwt token in the response

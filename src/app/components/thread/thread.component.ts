@@ -20,9 +20,8 @@ export class ThreadComponent implements OnInit {
 
     constructor(public route: ActivatedRoute, private threadService: ThreadService, private msgService: MessagesService) {
         this.sub = this.route.params.subscribe(params => {
-            let id: number = +params['threadId'];
-            this.id = id;
-            if (id) {
+            this.id = +params['threadId'];
+            if (this.id) {
                 this.threadService.getThread(this.id).subscribe((data) => {
                     this.data = data;
                     this.threadService.activeThreadStatus.emit(data);

@@ -8,7 +8,7 @@
         <li class="nav-item" *ngIf="authenticated">
             <a class="nav-link" [routerLink]="['/user']">
               <img class="img-user" [src]="user['avatar']"/>
-               {{user['name']}}</a>
+               <span class="role">{{user['role']?.name}}:</span> {{user['name']}}</a>
         </li>
         <li class="nav-item" *ngIf="!authenticated">
             <a class="nav-link" [routerLink]="['/register']">Register</a>

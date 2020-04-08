@@ -1,2 +1,30 @@
 #body-elem {
 }
+
+.navbar {
+  background: #36465d !important;
+}
+
+::ng-deep {
+  .ss-content {
+    height: 100%;
+    width: calc(100% + 18px);
+    padding: 0 0 0 0;
+    position: relative;
+    overflow: auto;
+    box-sizing: border-box;
+    overflow-x: hidden!important;
+  }
+
+  .ss-scroll {
+    position: relative;
+    background: rgba(30, 85, 127, 0.3);
+    width: 5px;
+    border-radius: 4px;
+    top: 0;
+    z-index: 2;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.25s linear;
+  }
+}

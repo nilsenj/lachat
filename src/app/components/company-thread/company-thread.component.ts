@@ -11,43 +11,46 @@ import {CompanyService} from "../../services/company.service";
   styleUrls: ['./company-thread.component.scss']
 })
 export class CompanyThreadComponent implements OnInit {
-  @Input('threads') threads: [Thread];
-  @Input('company') company: Company;
+  @Input('thread') thread: Thread;
   @Input('activeThread') activeThread: any;
   activeThreadId: string | number = null;
-  activeCompanyId: string | number = null;
   params: any;
+  currentUser: any;
 
   constructor(public route: ActivatedRoute, private threadService: ThreadService, private companyService: CompanyService) {
     if (this.activeThread) {
       this.activeThreadId = this.activeThread.id;
     }
-    if (this.company) {
-      this.activeCompanyId = this.company.id;
-    }
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
     this.route.params.subscribe(params => {
-      if (+params['id']) {
-        let id: number = +params['id'];
-        this.companyService.getCompany(id).subscribe((data) => {
-          this.company = data;
-          this.activeCompanyId = data.id;
-          this.companyService.activeCompanyStatus.emit(data);
+      if (+params['threadId']) {
+        const threadId = +params['threadId'];
+        this.threadService.getThread(threadId).subscribe((thread) => {
+          if (thread) {
+            const id: number | string = thread.id;
+            this.activeThread = thread;
+            this.activeThreadId = id;
+          }
         });
-        if (+params['threadId']) {
-          let threadId: number = +params['threadId'];
-          this.threadService.getThread(threadId).subscribe((thread) => {
-            if (thread) {
-              let id: number | string = thread.id;
-              this.activeThread = thread;
-              this.activeThreadId = id;
-            }
-          });
-        }
       }
     });
 
   }
 
+  getThreadName(thread: Thread) {
+    if (!!thread.participants && thread.participants.length > 2) {
+      const participants = thread.participants.filter((part) => {
+        return Number(part.user_id) !== Number(this.currentUser.id);
+      });
+      return participants[0].user.name + ' + ' + (participants.length - 1) + ' Participants';
+    } else {
+      const participants = thread.participants.filter((part) => {
+        return Number(part.user_id) !== Number(this.currentUser.id);
+      });
+      return participants[0].user.name;
+    }
+  }
 
   ngOnInit() {
   }
@@ -58,7 +61,6 @@ export class CompanyThreadComponent implements OnInit {
    */
   changeActiveThreadId(threadId: number) {
     this.activeThreadId = threadId;
-
   }
 
 }

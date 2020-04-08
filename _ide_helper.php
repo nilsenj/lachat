@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.4.32 on 2018-03-18.
+ * Generated for Laravel 5.4.32 on 2020-04-08.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -11794,6 +11794,276 @@ namespace Tymon\JWTAuth\Facades {
  
 }
 
+namespace Laravolt\Avatar { 
+
+    class Facade {
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setGenerator($generator)
+        {
+            return \Laravolt\Avatar\Avatar::setGenerator($generator);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function create($name)
+        {
+            return \Laravolt\Avatar\Avatar::create($name);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setFont($font)
+        {
+            return \Laravolt\Avatar\Avatar::setFont($font);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function toBase64()
+        {
+            return \Laravolt\Avatar\Avatar::toBase64();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function save($path, $quality = 90)
+        {
+            return \Laravolt\Avatar\Avatar::save($path, $quality);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function toSvg()
+        {
+            return \Laravolt\Avatar\Avatar::toSvg();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setBackground($hex)
+        {
+            return \Laravolt\Avatar\Avatar::setBackground($hex);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setForeground($hex)
+        {
+            return \Laravolt\Avatar\Avatar::setForeground($hex);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setDimension($width, $height = null)
+        {
+            return \Laravolt\Avatar\Avatar::setDimension($width, $height);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setFontSize($size)
+        {
+            return \Laravolt\Avatar\Avatar::setFontSize($size);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setBorder($size, $color)
+        {
+            return \Laravolt\Avatar\Avatar::setBorder($size, $color);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setShape($shape)
+        {
+            return \Laravolt\Avatar\Avatar::setShape($shape);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getInitial()
+        {
+            return \Laravolt\Avatar\Avatar::getInitial();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getImageObject()
+        {
+            return \Laravolt\Avatar\Avatar::getImageObject();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function buildAvatar()
+        {
+            return \Laravolt\Avatar\Avatar::buildAvatar();
+        }
+         
+    }
+ 
+}
+
+namespace Zizaco\Entrust { 
+
+    class EntrustFacade {
+        
+        /**
+         * Checks if the current user has a role by its name
+         *
+         * @param string $name Role name.
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasRole($role, $requireAll = false)
+        {
+            return \Zizaco\Entrust\Entrust::hasRole($role, $requireAll);
+        }
+        
+        /**
+         * Check if the current user has a permission by its name
+         *
+         * @param string $permission Permission string.
+         * @return bool 
+         * @static 
+         */ 
+        public static function can($permission, $requireAll = false)
+        {
+            return \Zizaco\Entrust\Entrust::can($permission, $requireAll);
+        }
+        
+        /**
+         * Check if the current user has a role or permission by its name
+         *
+         * @param array|string $roles The role(s) needed.
+         * @param array|string $permissions The permission(s) needed.
+         * @param array $options The Options.
+         * @return bool 
+         * @static 
+         */ 
+        public static function ability($roles, $permissions, $options = array())
+        {
+            return \Zizaco\Entrust\Entrust::ability($roles, $permissions, $options);
+        }
+        
+        /**
+         * Get the currently authenticated user or null.
+         *
+         * @return \Zizaco\Entrust\Illuminate\Auth\UserInterface|null 
+         * @static 
+         */ 
+        public static function user()
+        {
+            return \Zizaco\Entrust\Entrust::user();
+        }
+        
+        /**
+         * Filters a route for a role or set of roles.
+         * 
+         * If the third parameter is null then abort with status code 403.
+         * Otherwise the $result is returned.
+         *
+         * @param string $route Route pattern. i.e: "admin/*"
+         * @param array|string $roles The role(s) needed
+         * @param mixed $result i.e: Redirect::to('/')
+         * @param bool $requireAll User must have all roles
+         * @return mixed 
+         * @static 
+         */ 
+        public static function routeNeedsRole($route, $roles, $result = null, $requireAll = true)
+        {
+            return \Zizaco\Entrust\Entrust::routeNeedsRole($route, $roles, $result, $requireAll);
+        }
+        
+        /**
+         * Filters a route for a permission or set of permissions.
+         * 
+         * If the third parameter is null then abort with status code 403.
+         * Otherwise the $result is returned.
+         *
+         * @param string $route Route pattern. i.e: "admin/*"
+         * @param array|string $permissions The permission(s) needed
+         * @param mixed $result i.e: Redirect::to('/')
+         * @param bool $requireAll User must have all permissions
+         * @return mixed 
+         * @static 
+         */ 
+        public static function routeNeedsPermission($route, $permissions, $result = null, $requireAll = true)
+        {
+            return \Zizaco\Entrust\Entrust::routeNeedsPermission($route, $permissions, $result, $requireAll);
+        }
+        
+        /**
+         * Filters a route for role(s) and/or permission(s).
+         * 
+         * If the third parameter is null then abort with status code 403.
+         * Otherwise the $result is returned.
+         *
+         * @param string $route Route pattern. i.e: "admin/*"
+         * @param array|string $roles The role(s) needed
+         * @param array|string $permissions The permission(s) needed
+         * @param mixed $result i.e: Redirect::to('/')
+         * @param bool $requireAll User must have all roles and permissions
+         * @return void 
+         * @static 
+         */ 
+        public static function routeNeedsRoleOrPermission($route, $roles, $permissions, $result = null, $requireAll = false)
+        {
+            \Zizaco\Entrust\Entrust::routeNeedsRoleOrPermission($route, $roles, $permissions, $result, $requireAll);
+        }
+         
+    }
+ 
+}
+
 
 namespace  { 
 
@@ -13861,6 +14131,10 @@ namespace  {
     class View extends \Illuminate\Support\Facades\View {}
 
     class JWTAuth extends \Tymon\JWTAuth\Facades\JWTAuth {}
+
+    class Avatar extends \Laravolt\Avatar\Facade {}
+
+    class Entrust extends \Zizaco\Entrust\EntrustFacade {}
  
 }
 

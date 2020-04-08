@@ -46,7 +46,7 @@ export class CompanyService {
   }
 
   /**
-   * get company by id
+   * get threads by id
    *
    * @param {string} id
    * @returns {Observable<Thread>}

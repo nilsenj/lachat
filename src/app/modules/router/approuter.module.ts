@@ -14,8 +14,8 @@ const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: '', component: WelcomeComponent, canActivate: [RedirectIfLoggedInGuard]},
   {path: 'chat', component: ChatComponent, canActivate: [AuthGuard]},
-  {path: 'chat/company/:id', component: ChatComponent, canActivate: [AuthGuard]},
-  {path: 'chat/company/:id/threads/:threadId', component: ChatComponent, canActivate: [AuthGuard]},
+  {path: 'chat/threads', component: ChatComponent, canActivate: [AuthGuard]},
+  {path: 'chat/threads/:threadId', component: ChatComponent, canActivate: [AuthGuard]},
   {path: 'user', component: UserComponent, canActivate: [AuthGuard]},
 
   // otherwise redirect to home

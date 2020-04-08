@@ -24,7 +24,7 @@ class Thread extends Eloquent
    *
    * @var array
    */
-  protected $fillable = ['subject', 'company_id'];
+  protected $fillable = ['subject'];
 
   /**
    * The attributes that should be mutated to dates.
@@ -32,6 +32,8 @@ class Thread extends Eloquent
    * @var array
    */
   protected $dates = ['deleted_at'];
+
+  protected $appends = ['latest_message'];
 
 
   /**
@@ -64,21 +66,13 @@ class Thread extends Eloquent
   }
 
   /**
-   * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-   */
-  public function company()
-  {
-    return $this->belongsTo(Company::class, 'company_id', 'id');
-  }
-
-  /**
    * Returns the latest message from a thread.
    *
    * @return \App\Models\Message
    */
   public function getLatestMessageAttribute()
   {
-    return $this->messages()->latest()->first();
+    return $this->messages()->latest()->first()->load('user', 'user.roles');
   }
 
   /**

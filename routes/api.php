@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -43,6 +41,21 @@ Route::group(['middleware' => ['api'], 'as' => 'api.'], function () {
     Route::get('/user', [
       'uses' => 'UserController@index',
     ]);
+    Route::get('/profile', [
+      'uses' => 'ProfileController@show',
+    ]);
+    Route::get('/profile/index', [
+      'uses' => 'ProfileController@index',
+    ]);
+    Route::post('/profile/update', [
+      'uses' => 'ProfileController@update',
+    ]);
+    Route::get('/profile/story', [
+      'uses' => 'StoryController@index',
+    ]);
+    Route::get('/profile/story/update', [
+      'uses' => 'StoryController@update',
+    ]);
     Route::group(['prefix' => 'messages', 'as' => 'messages.'], function () {
       Route::post('/openThread/{id}', [
         'uses' => 'Api\MessagesController@openThread',
@@ -64,9 +77,9 @@ Route::group(['middleware' => ['api'], 'as' => 'api.'], function () {
       ]);
     });
 
-    Route::group(['prefix' => 'companies', 'as' => 'companies.'], function () {
-    });
-    Route::resource('companies', 'Api\CompanyController', []);
     Route::resource('threads', 'Api\ThreadsController', []);
   });
+});
+Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function () {
+
 });

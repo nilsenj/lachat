@@ -28,7 +28,8 @@ class ThreadsController extends Controller
     // All threads, ignore deleted/archived participants
     //$threads = Thread::getAllLatest()->get();
     // All threads that user is participating in
-    $threads = Thread::forUser($currentUserId)->latest('updated_at')->orderBy('subject')->get()->unique();
+    $threads = Thread::forUser($currentUserId)->latest('updated_at')->with('participants')->orderBy('subject')->get()
+      ->unique();
     // All threads that user is participating in, with new messages
 //      $threads = Thread::forUserWithNewMessages($currentUserId)->latest('updated_at')->get();
     return response()->json($threads);
@@ -84,7 +85,7 @@ class ThreadsController extends Controller
     $userId = $request->user()->id;
 //        $users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
     $thread->markAsRead($userId);
-    $thread->load([]);
+    $thread->load(['participants']);
 
     return response()->json($thread);
   }
@@ -92,7 +93,7 @@ class ThreadsController extends Controller
   /**
    * Show the form for editing the specified resource.
    *
-   * @param  int $id
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function edit($id)
@@ -103,8 +104,8 @@ class ThreadsController extends Controller
   /**
    * Update the specified resource in storage.
    *
-   * @param  \Illuminate\Http\Request $request
-   * @param  int $id
+   * @param \Illuminate\Http\Request $request
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function update(Request $request, $id)
@@ -115,7 +116,7 @@ class ThreadsController extends Controller
   /**
    * Remove the specified resource from storage.
    *
-   * @param  int $id
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function destroy($id)
