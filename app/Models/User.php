@@ -53,8 +53,8 @@ class User extends Authenticatable
 
   private static function createUserAvatar()
   {
-    User::creating(function ($user) {
-      $folder = 'avatars/' . Carbon::now()->format('DD-MM-YYY');
+    User::created(function ($user) {
+      $folder = 'avatars/' . $user->id;
       $time = time();
       if (!\Storage::disk('public')->exists($folder)) {
         if (!\Storage::disk('public')->exists('avatars')) {

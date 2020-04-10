@@ -29,9 +29,11 @@ class UsersTableSeeder extends Seeder
       'trend1' => \App\Models\Trends::find($fake->numberBetween(1, \App\Models\Trends::count()))->id,
       'trend2' => \App\Models\Trends::find($fake->numberBetween(1, \App\Models\Trends::count()))->id,
       'trend3' => \App\Models\Trends::find($fake->numberBetween(1, \App\Models\Trends::count()))->id,
-      'description' => str_limit(implode($fake->sentences(4)), 300),
-      'links' => "{website: '".$fake->url."', workprofile: 'https://www.linkedin.com/in/ivan-nikolenko-913096a9'}",
+      'description' => str_limit(implode($fake->sentences(20)), 1000),
+      'links' => json_encode(['website' => $fake->url, 'workprofile' => 'https://www.linkedin.com/in/ivan-nikolenko-913096a9']),
       'experience' => $fake->numberBetween(1, 45),
+      'hour_rate' => $fake->numberBetween(100, 1000),
+      'client_amount' => $fake->numberBetween(1, 1000)
     ]);
 
     $faker = Faker\Factory::create();
@@ -44,9 +46,10 @@ class UsersTableSeeder extends Seeder
           'trend1' => \App\Models\Trends::find($faker->numberBetween(1, \App\Models\Trends::count()))->id,
           'trend2' => \App\Models\Trends::find($faker->numberBetween(1, \App\Models\Trends::count()))->id,
           'trend3' => \App\Models\Trends::find($faker->numberBetween(1, \App\Models\Trends::count()))->id,
-          'description' => str_limit(implode($faker->sentences(4)), 300),
+          'description' => str_limit(implode($faker->sentences(20)), 1000),
           'links' => "{website: '".$faker->url."', workprofile: 'https://www.linkedin.com/in/ivan-nikolenko-913096a9'}",
           'experience' => $faker->numberBetween(1, 45),
+          'client_amount' => $faker->numberBetween(1, 1000)
         ]);
       }
     });

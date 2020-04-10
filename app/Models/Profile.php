@@ -16,7 +16,9 @@ class Profile extends Model
     'links',
     'file',
     'experience',
-    'position'
+    'position',
+    'hour_rate',
+    'client_amount'
   ];
 
   protected $casts = [

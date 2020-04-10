@@ -39,6 +39,7 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
     "ng2-toastr": "^4.1.2",
+    "ngx-image-cropper": "^1.0.1",
     "popper.js": "^1.16.1",
     "prismjs": "^1.20.0",
     "rxjs": "^5.4.2",

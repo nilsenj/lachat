@@ -3,10 +3,8 @@ import {Http, Headers, Response, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import {app} from "../../config/app";
-import {arrays} from "../helpers/arrays";
 import {ToastrService} from "./toastr.service";
 import {Company} from "../models/Company";
-import {Subject} from "rxjs/Subject";
 import {Thread} from "../models/Thread";
 
 @Injectable()

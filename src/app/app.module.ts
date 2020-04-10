@@ -40,6 +40,10 @@ import {SafePipePipe} from './pipes/safe-pipe.pipe';
 import {EmojisComponent} from './components/emojis/emojis.component';
 import {Autosize} from 'angular2-autosize';
 import {ProfileService} from "./services/profile.service";
+import {ImageUploadService} from "./services/image-upload.service";
+import {ImageUploadComponent} from "./components/image-upload/image-upload.component";
+import {ImageCropperModule} from "ngx-image-cropper";
+import {UserEditComponent} from "./components/user-edit/user-edit.component";
 
 @NgModule({
   declarations: [
@@ -66,6 +70,8 @@ import {ProfileService} from "./services/profile.service";
     BypassSecurityComponent,
     SafePipePipe,
     EmojisComponent,
+    ImageUploadComponent,
+    UserEditComponent,
     Autosize
   ],
   imports: [
@@ -76,6 +82,7 @@ import {ProfileService} from "./services/profile.service";
     BrowserAnimationsModule,
     ReactiveFormsModule,
     AngularFontAwesomeModule,
+    ImageCropperModule,
     ToastModule.forRoot()
   ],
   providers: [
@@ -88,6 +95,7 @@ import {ProfileService} from "./services/profile.service";
     ThreadService,
     MessagesService,
     ValidationService,
+    ImageUploadService,
     {provide: ToastOptions, useClass: CustomToastr},
   ],
   bootstrap: [AppComponent]

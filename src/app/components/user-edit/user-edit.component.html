@@ -1,0 +1,58 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="row" novalidate>
+  <div class="form-group d-flex w-100">
+    <div class="col-12">
+      <label for="trend1">Ваша основна професія</label>
+      <input class="form-control" type="text" formControlName="position"/>
+    </div>
+  </div>
+  <div class="form-group d-flex w-100" novalidate>
+    <div class="col-12">
+      <h5>Ваші посилання</h5>
+    </div>
+  </div>
+  <div class="form-group d-flex w-100" formGroupName="links" novalidate>
+    <div class="col-6">
+      <label for="website">Website</label>
+      <input class="form-control" formControlName="website"/>
+    </div>
+    <div class="col-6">
+      <label for="workprofile">Workprofile</label>
+      <input class="form-control" formControlName="workprofile"/>
+    </div>
+  </div>
+  <div class="form-group d-flex w-100">
+    <div class="col-4">
+      <label for="trend1">Ваше перше направлення</label>
+      <input class="form-control" formControlName="trend1"/>
+      <select name="" id=""></select>
+    </div>
+    <div class="col-4">
+      <label for="trend2">Ваше друге направлення</label>
+      <input class="form-control" formControlName="trend2"/>
+    </div>
+    <div class="col-4">
+      <label for="trend3">Ваше третє направлення</label>
+      <input class="form-control" formControlName="trend3"/>
+    </div>
+  </div>
+  <div class="form-group d-flex w-100">
+    <div class="col-12">
+      <label for="description">Ваша біографія</label>
+      <textarea class="form-control" formControlName="description"></textarea>
+    </div>
+  </div>
+  <div class="form-group d-flex w-100">
+    <div class="col-6">
+      <label for="experience">Ваше досвід(в роках)</label>
+      <input class="form-control" type="number" formControlName="experience"/>
+    </div>
+    <div class="col-6">
+      <label for="hour_rate">Ваша почасова ставка(в грн)</label>
+      <input class="form-control" type="number" formControlName="hour_rate"/>
+    </div>
+  </div>
+  <button class="btn btn-lg btn-success" type="submit" [disabled]="profileForm.pristine">Save</button>
+  <button class="btn btn-lg" type="reset" (click)="revert()" [disabled]="profileForm.pristine">
+    Revert
+  </button>
+</form>

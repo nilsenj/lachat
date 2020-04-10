@@ -12,4 +12,6 @@ export class Profile {
   description?: string;
   experience?: string | number;
   position?: string;
+  hour_rate?: number;
+  client_amount?: number;
 }

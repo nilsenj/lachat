@@ -47,6 +47,9 @@ Route::group(['middleware' => ['api'], 'as' => 'api.'], function () {
     Route::get('/profile/index', [
       'uses' => 'ProfileController@index',
     ]);
+    Route::post('/profile/uploadAvatar', [
+      'uses' => 'ProfileController@uploadAvatar',
+    ]);
     Route::post('/profile/update', [
       'uses' => 'ProfileController@update',
     ]);

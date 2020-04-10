@@ -60,13 +60,13 @@ export class ProfileService {
    *
    * @returns {Observable<Profile>}
    */
-  updateProfile(): Observable<Profile> {
+  updateProfile(profile: Profile): Observable<Profile> {
     // add authorization header with jwt token
     const headers = new Headers({'Authorization': 'Bearer ' + this.token});
     const options = new RequestOptions({headers: headers});
 
     // get users from api
-    return this.http.post(app.api_url + '/api/profile/update', options)
+    return this.http.post(app.api_url + '/api/profile/update', profile, options)
       .map((response: Response) => response.json());
   }
 }

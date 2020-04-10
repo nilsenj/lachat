@@ -9,7 +9,7 @@
   </div>
   <div class="form-group message"
        [ngClass]="{ 'has-error': msgForm.submitted && !msg.valid }">
-      <textarea (keyup.esc)="closeMsg($event)" type="text" class="form-control input-message"
+      <textarea (keyup.esc)="closeMsg()" type="text" class="form-control input-message"
                 name="msg" [(ngModel)]="model.msg" formControlName="msg" placeholder="Write your message..."
                 autosize></textarea>
     <!--<div *ngIf="f.submitted && !msg.valid" class="help-block">Msg is required</div>-->
