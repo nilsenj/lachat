@@ -12,6 +12,13 @@ body {
 
 .profile-img {
   text-align: center;
+  background-color: transparent;
+  position: relative;
+  clear: both;
+  width: 100%;
+  height: auto;
+  display: block;
+  padding-bottom: 50px;
 }
 
 .profile-img img {

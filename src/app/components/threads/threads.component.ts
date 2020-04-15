@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {AuthenticationService} from "../../services/authentication.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ToastrService} from "../../services/toastr.service";
 import {ThreadService} from "../../services/thread.service";
 import {Thread} from "../../models/Thread";
 import {take, takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs";
 import {Participant} from "../../models/Participant";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-threads',

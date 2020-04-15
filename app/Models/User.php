@@ -56,6 +56,7 @@ class User extends Authenticatable
     User::created(function ($user) {
       $folder = 'avatars/' . $user->id;
       $time = time();
+      \File::deleteDirectory(\Storage::disk('public')->path($folder));
       if (!\Storage::disk('public')->exists($folder)) {
         if (!\Storage::disk('public')->exists('avatars')) {
           \File::makeDirectory(\Storage::disk('public')->path('avatars'));
@@ -64,6 +65,7 @@ class User extends Authenticatable
       }
       \Avatar::create($user->name)->save(\Storage::disk('public')->path($folder) . '/' . $user->email . '-' . $time . '.jpg', 100);
       $user->avatar = '/storage/public/' . $folder . '/' . $user->email . '-' . $time . '.jpg';
+      $user->save();
     });
   }
 

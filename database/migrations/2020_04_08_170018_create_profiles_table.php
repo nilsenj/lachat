@@ -42,7 +42,6 @@ class CreateProfilesTable extends Migration
         ->onDelete('cascade');
       $table->longText('links')->nullable();
       $table->decimal('experience', 3, 1)->nullable();
-      $table->text('position')->nullable();
       $table->decimal('hour_rate')->nullable();
       $table->integer('client_amount')->default(0);
       $table->timestamps();

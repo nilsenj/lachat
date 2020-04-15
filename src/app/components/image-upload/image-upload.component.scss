@@ -5,6 +5,8 @@ input {
 .img-preview-container {
   background-color: transparent;
   position: relative;
+  display: inline-block;
+  clear: both;
 
   .img-preview {
     background: center center no-repeat;
@@ -12,7 +14,6 @@ input {
     height: 116px;
     width: 116px;
     margin: 0 auto;
-    margin-bottom: 45px;
   }
 }
 

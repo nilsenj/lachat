@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class ValidationService {
 
     static getValidatorErrorMessage(validatorName: string, validatorValue?: any) {
-        let config = {
+        const config = {
             'required': 'Required',
             'invalidCreditCard': 'Is invalid credit card number',
             'invalidEmailAddress': 'Invalid email address',

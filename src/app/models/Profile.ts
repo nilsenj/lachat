@@ -3,6 +3,7 @@ export class Profile {
   links?: any;
   user_id: number;
   trends?: any;
+  selectedTrends?: any;
   trend1?: number;
   trend2?: number;
   trend3?: number;
@@ -11,7 +12,6 @@ export class Profile {
   file?: any;
   description?: string;
   experience?: string | number;
-  position?: string;
   hour_rate?: number;
   client_amount?: number;
 }

@@ -16,7 +16,6 @@ class Profile extends Model
     'links',
     'file',
     'experience',
-    'position',
     'hour_rate',
     'client_amount'
   ];
@@ -61,7 +60,7 @@ class Profile extends Model
     return $this->hasOne(Trends::class, 'id','trend3');
   }
 
-  public function trends() {
+  public function selectedTrends() {
     return collect([$this->trend1()->first(), $this->trend2()->first(), $this->trend3()->first()]);
   }
 }

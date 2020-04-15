@@ -1,15 +1,12 @@
-import {
-  AfterViewChecked, AfterViewInit, Component, ElementRef, Input, OnInit, QueryList, ViewChild,
-  ViewChildren
-} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Thread} from "../../models/Thread";
 import {Router} from "@angular/router";
 import {AuthenticationService} from "../../services/authentication.service";
-import {ToastrService} from "../../services/toastr.service";
 import {ThreadService} from "../../services/thread.service";
 import {MessagesService} from "../../services/messages.service";
 import * as $ from 'jquery';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-thread-message-input',
@@ -19,11 +16,11 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class ThreadMessageInputComponent implements OnInit {
   @Input('thread') thread: Thread;
   @Input() public msgForm: FormGroup;
-  public visibleEmojis: boolean = false;
+  public visibleEmojis = false;
   public model: any = {};
   loading = false;
   error = '';
-  public selectedIcon: string = "";
+  public selectedIcon = "";
   public canSendMsg: boolean;
 
   constructor(private router: Router,
@@ -53,15 +50,14 @@ export class ThreadMessageInputComponent implements OnInit {
   send() {
     this.loading = true;
     if (!this.msgForm.valid) {
-      this.toastrService.add("error",
-        "Form not valid! Try once more");
+      this.toastrService.error("Form not valid! Try once more");
     } else {
       if (this.thread.id) {
         this.messagesService.sendMsg(this.model.msg, this.thread.id)
           .subscribe((result) => {
             if (result) {
               this.messagesService.activeMessageStatus.emit(result);
-              this.toastrService.add('info', 'Message Sent!');
+              this.toastrService.info('Message Sent!');
               this.loading = false;
               this.model = {};
               $(".input-message").trigger('keyup');
@@ -74,7 +70,7 @@ export class ThreadMessageInputComponent implements OnInit {
             this.loading = false;
           });
       } else {
-        this.toastrService.add('error', 'Error during thread load')
+        this.toastrService.error('Error during thread load');
       }
     }
     this.loading = false;
@@ -103,7 +99,7 @@ export class ThreadMessageInputComponent implements OnInit {
    * @param {string} icon
    */
   iconChanged(icon: string) {
-    if (icon && typeof icon !== 'undefined' && icon != undefined && icon != 'undefined') {
+    if (icon && typeof icon !== 'undefined' && icon !== undefined && icon !== 'undefined') {
       this.selectedIcon = icon;
       if (!this.model.msg) {
         this.model.msg = '';
@@ -123,11 +119,11 @@ export class ThreadMessageInputComponent implements OnInit {
 
   private setupMsgEvents(): void {
     $(document).ready(() => {
-      let that = this;
-      let msg = this.model.msg;
-      let inputHeight = $(".input-message").height();
-      let msgBody = $('.wrap-message').height();
-      let difference = msgBody - inputHeight;
+      const that = this;
+      const msg = this.model.msg;
+      const inputHeight = $(".input-message").height();
+      const msgBody = $('.wrap-message').height();
+      const difference = msgBody - inputHeight;
 
       $(".input-message").on('focus', (e) => {
         this.setCaretAtEnd($(".input-message"));
@@ -138,13 +134,13 @@ export class ThreadMessageInputComponent implements OnInit {
       }));
       $(".input-message").on('keyup', (e => {
         this.setInputWrapperAlignment($(e.target), difference);
-        if (e.keyCode == 13 && e.shiftKey) {
+        if (e.keyCode === 13 && e.shiftKey) {
           e.stopPropagation();
-        } else if (e.keyCode == 13) {
+        } else if (e.keyCode === 13) {
           if (that.msgForm.valid) {
             that.send();
             $(".input-message").trigger('focus');
-            this.closeMsg()
+            this.closeMsg();
           }
           that.model.msg = "";
         }
@@ -163,7 +159,7 @@ export class ThreadMessageInputComponent implements OnInit {
   }
 
   private setCaretAtEnd(elem) {
-    let $thisVal = elem.val();
+    const $thisVal = elem.val();
     elem.val('').val($thisVal);
   }
 

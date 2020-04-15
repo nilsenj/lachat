@@ -2,6 +2,7 @@ import {Component, OnInit, EventEmitter, Output} from '@angular/core';
 import {ImageUploadService} from '../../services/image-upload.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ToastrService} from "../../services/toastr.service";
+import {AuthenticationService} from "../../services/authentication.service";
 
 class FileSnippet {
   static readonly IMAGE_SIZE = {width: 150, height: 250};
@@ -29,6 +30,7 @@ export class ImageUploadComponent {
   imageChangedEvent: any;
 
   constructor(private toastr: ToastrService,
+              private authService: AuthenticationService,
               private imageService: ImageUploadService) {
   }
 
@@ -37,6 +39,7 @@ export class ImageUploadComponent {
     this.selectedFile.status = 'OK';
     this.imageChangedEvent = null;
     this.imageUploaded.emit(imageUrl);
+    this.authService.userNeedsChange.emit(imageUrl);
   }
 
   private onFailure() {

@@ -7,8 +7,8 @@ import * as $ from 'jquery';
   styleUrls: ['./emojis.component.scss']
 })
 export class EmojisComponent implements OnInit {
-  @Input() public visibleEmoji: boolean = false;
-  @Input('selectedIcon') public selectedIcon: string = '';
+  @Input() public visibleEmoji = false;
+  @Input('selectedIcon') public selectedIcon = '';
   @Output('triggerSelectedIcon') triggerSelectedIcon = new EventEmitter();
   @Output('triggerVisibleEmoji') triggerVisibleEmoji = new EventEmitter();
 
@@ -18,7 +18,7 @@ export class EmojisComponent implements OnInit {
   ngOnInit() {
     $(document).ready(() => {
       $(document).keyup((e) => {
-        if (e.which == 27) {
+        if (e.which === 27) {
           this.visibleEmoji = false;
           this.triggerVisibleEmoji.emit(false);
         }
@@ -29,11 +29,11 @@ export class EmojisComponent implements OnInit {
   selectIcon(event: any) {
     event.preventDefault();
     if ($('.icon-list  .' + event.target.className.split(' ')[1]).length > 1) {
-      let icon = $('.icon-list .' + event.target.className.split(' ')[1]).eq(1).data('name');
-      this.selectedIcon = icon ? icon != 'undefined' ? icon : null : null;
+      const icon = $('.icon-list .' + event.target.className.split(' ')[1]).eq(1).data('name');
+      this.selectedIcon = icon ? icon !== 'undefined' ? icon : null : null;
     } else {
-      let icon = $('.icon-list .' + event.target.className.split(' ')[1]).data('name');
-      this.selectedIcon = icon ? icon != 'undefined' ? icon : null : null;
+      const icon = $('.icon-list .' + event.target.className.split(' ')[1]).data('name');
+      this.selectedIcon = icon ? icon !== 'undefined' ? icon : null : null;
     }
     if (this.selectedIcon) {
       this.triggerSelectedIcon.emit(this.selectedIcon);

@@ -1,18 +1,17 @@
+import {map} from 'rxjs/operators';
 import {EventEmitter, Inject, Injectable, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
-import {Http, Headers, Response, RequestOptions} from '@angular/http';
-import {Observable} from 'rxjs/Rx';
-import 'rxjs/add/operator/map';
+import {Headers, Response, RequestOptions} from '@angular/http';
+import {Observable} from 'rxjs';
+
 import {app} from "../../config/app";
 import {User} from "../models/User";
 import {arrays} from "../helpers/arrays";
 import {ToastrService} from "./toastr.service";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable()
 export class AuthenticationService {
-  /**
-   *token field
-   */
-  public token: string;
+  token: string;
   /**
    * emit events
    *
@@ -20,13 +19,14 @@ export class AuthenticationService {
    */
   public userEvent: EventEmitter<any> = new EventEmitter();
   public userChange = new EventEmitter();
+  public userNeedsChange = new EventEmitter();
   public user: any;
   @Input() authenticated: boolean;
 
-  constructor(@Inject(Http) private http: Http,
+  constructor(@Inject(HttpClient) private http: HttpClient,
               private toastrService: ToastrService) {
     // set token if saved in local storage
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.token = currentUser && currentUser.token;
   }
 
@@ -38,21 +38,21 @@ export class AuthenticationService {
    * @returns {Observable<R>}
    */
   login(email: string, password: string): Observable<boolean> {
-    return this.http.post(app.api_url + '/api/login', {email: email, password: password})
-      .map((response: Response) => {
+    return this.http.post(app.api_url + '/api/login', {email: email, password: password}).pipe(
+      map((response: any) => {
           // login successful if there's a jwt token in the response
-          let token = response.json() && response.json().meta.token;
+          const token = response && response.meta.token;
           if (token) {
             // set token property
             this.token = token;
-            this.userEvent.emit(response.json());
-            let name = response.json().data.name ? response.json().data.name : "";
-            let id = response.json().data.id ? response.json().data.id : "";
+            this.userEvent.emit(response);
+            const name = response.data.name ? response.data.name : "";
+            const id = response.data.id ? response.data.id : "";
 
             // store email and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('currentUser', JSON.stringify({id: id, name: name, email: email, token: token}));
             this.getUser();
-            this.userChange.emit(response.json());
+            this.userChange.emit(response);
 
             // return true to indicate successful login
             return true;
@@ -61,7 +61,7 @@ export class AuthenticationService {
             return false;
           }
         }
-      );
+      ));
   }
 
   getUser(): any {
@@ -87,13 +87,9 @@ export class AuthenticationService {
    * @returns {Observable<R>}
    */
   getUsers(): Observable<User[]> {
-    // add authorization header with jwt token
-    let headers = new Headers({'Authorization': 'Bearer ' + this.token});
-    let options = new RequestOptions({headers: headers});
-
     // get users from api
-    return this.http.get(app.api_url + '/api/users', options)
-      .map((response: Response) => response.json());
+    return this.http.get(app.api_url + '/api/users').pipe(
+      map((response: User[]) => response));
   }
 
   /**
@@ -101,14 +97,10 @@ export class AuthenticationService {
    *
    * @returns {Observable<R>}
    */
-  getAuthenticatedUser(): Observable<User[]> {
-    // add authorization header with jwt token
-    let headers = new Headers({'Authorization': 'Bearer ' + this.token});
-    let options = new RequestOptions({headers: headers});
-
+  getAuthenticatedUser(): Observable<User> {
     // get users from api
-    return this.http.get(app.api_url + '/api/user', options)
-      .map((response: Response) => response.json());
+    return this.http.get(app.api_url + '/api/user').pipe(
+      map((response: User) => response));
   }
 
   /**
@@ -127,17 +119,17 @@ export class AuthenticationService {
       password: password,
       password_confirmation: confirm,
       role: role
-    })
-      .map((response: Response) => {
+    }).pipe(
+      map((response: User) => {
         // register successful if there's a jwt token in the response
-        let token = response.json() && response.json().token;
+        const token = response && response.token;
         if (token) {
-          // set token property
           this.token = token;
-          this.userEvent.emit(response.json());
-          let name = response.json().name ? response.json().name : "";
-          let id = response.json().id ? response.json().id : 0;
-          let user = {id: id, name: name, email: email, token: token};
+          // set token property
+          this.userEvent.emit(response);
+          const userName = response.name ? response.name : "";
+          const id = response.id ? response.id : 0;
+          const user = {id: id, name: userName, email: email, token: token};
           // store username and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.user = user;
@@ -150,7 +142,7 @@ export class AuthenticationService {
           // return false to indicate failed login
           return false;
         }
-      });
+      }));
   }
 
   /**

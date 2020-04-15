@@ -59,6 +59,9 @@ Route::group(['middleware' => ['api'], 'as' => 'api.'], function () {
     Route::get('/profile/story/update', [
       'uses' => 'StoryController@update',
     ]);
+    Route::get('/trends', [
+      'uses' => 'TrendsController@index',
+    ]);
     Route::group(['prefix' => 'messages', 'as' => 'messages.'], function () {
       Route::post('/openThread/{id}', [
         'uses' => 'Api\MessagesController@openThread',

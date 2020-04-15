@@ -25,7 +25,6 @@ class UsersTableSeeder extends Seeder
     $fake = Faker\Factory::create();
     $user->profile()->update([
       'user_id' => $user->id,
-      'position' => \App\Models\Trends::find($fake->numberBetween(1, \App\Models\Trends::count()))->name,
       'trend1' => \App\Models\Trends::find($fake->numberBetween(1, \App\Models\Trends::count()))->id,
       'trend2' => \App\Models\Trends::find($fake->numberBetween(1, \App\Models\Trends::count()))->id,
       'trend3' => \App\Models\Trends::find($fake->numberBetween(1, \App\Models\Trends::count()))->id,
@@ -42,7 +41,6 @@ class UsersTableSeeder extends Seeder
       $u->attachRole($role);
       if ($role === 3) {
         $u->profile()->updateOrCreate([
-          'position' => \App\Models\Trends::find($faker->numberBetween(1, \App\Models\Trends::count()))->name,
           'trend1' => \App\Models\Trends::find($faker->numberBetween(1, \App\Models\Trends::count()))->id,
           'trend2' => \App\Models\Trends::find($faker->numberBetween(1, \App\Models\Trends::count()))->id,
           'trend3' => \App\Models\Trends::find($faker->numberBetween(1, \App\Models\Trends::count()))->id,

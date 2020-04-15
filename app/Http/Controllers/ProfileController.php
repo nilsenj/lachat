@@ -36,21 +36,31 @@ class ProfileController extends Controller
   public function show(Request $request)
   {
     $profile = $request->user()->profile;
-    $profile->trends = $profile->trends();
+    $profile->selectedTrends = $profile->selectedTrends();
     return response()->json($profile);
 
   }
 
   /**
-   * Update the specified resource in storage.
-   *
-   * @param \Illuminate\Http\Request $request
-   * @param \App\Profile $profile
-   * @return \Illuminate\Http\Response
+   * @param Request $request
+   * @param Profile $profile
+   * @return \Illuminate\Http\JsonResponse
    */
   public function update(Request $request, Profile $profile)
   {
-    //
+    $profile = $request->user()->profile();
+    $data = $request->except('id', 'user_id');
+    $data['links'] = !empty($data['links']) ? json_encode($data['links']) : null;
+    $userData = !empty($data['user']) ? $data['user'] : null;
+    unset($data['selectedTrends']);
+    unset($data['user']);
+    $profile->update($data);
+    $request->user()->update($userData);
+    $user = $request->user()->load('profile');
+    $user['role'] = $user->roles()->first();
+    $user->profile->selectedTrends = $user->profile->selectedTrends();
+
+    return response()->json(compact('user'));
   }
 
   /**

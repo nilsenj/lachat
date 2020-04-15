@@ -1,47 +1,50 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthenticationService} from "../../services/authentication.service";
-import {ToastrService} from "../../services/toastr.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 
 export class LoginComponent implements OnInit {
 
-    model: any = {};
-    loading = false;
-    error = '';
+  model: any = {};
+  loading = false;
+  error = '';
 
-    constructor(private router: Router,
-                private authenticationService: AuthenticationService,
-                private toastrService: ToastrService) {
+  constructor(private router: Router,
+              private authenticationService: AuthenticationService,
+              private toastrService: ToastrService) {
+  }
+
+  ngOnInit() {
+    // reset login status
+    if (this.authenticationService.token) {
+      this.authenticationService.logout();
     }
+  }
 
-    ngOnInit() {
-        // reset login status
-        if(this.authenticationService.token) {
-            this.authenticationService.logout();
+  login() {
+    this.loading = true;
+    this.authenticationService.login(this.model.email, this.model.password)
+      .subscribe(result => {
+        console.log(result);
+        if (result === true) {
+          this.router.navigate(['/chat']);
+          this.authenticationService.userEvent.emit(result);
+          this.toastrService.info('You are logged in!');
+        } else {
+          this.error = 'Username or password is incorrect';
+          this.loading = false;
         }
-    }
-
-    login() {
-        this.loading = true;
-        this.authenticationService.login(this.model.email, this.model.password)
-            .subscribe(result => {
-                if (result === true) {
-                    this.router.navigate(['/chat']);
-                    this.authenticationService.userEvent.emit(result);
-                    this.toastrService.add('info', 'You are logged in!');
-                } else {
-                    this.error = 'Username or password is incorrect';
-                    this.loading = false;
-                }
-            }, (result) => {
-                this.error = 'Username or password is incorrect';
-                this.loading = false;
-            });
-    }
+      }, (result) => {
+        console.log('error');
+        console.log(result);
+        this.error = 'Username or password is incorrect';
+        this.loading = false;
+      });
+  }
 }

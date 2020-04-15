@@ -27,6 +27,10 @@
             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
                aria-selected="false">Робочі умови</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" id="carts-tab" data-toggle="tab" href="#carts" role="tab" aria-controls="carts"
+               aria-selected="false">Картки</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -41,7 +45,7 @@
         <a *ngIf="profile?.links?.website" href="{{profile?.links?.website}}">Вебсайт</a><br/>
         <a *ngIf="profile?.links?.workprofile" href="{{profile?.links?.workprofile}}">Робочий профіль</a><br/>
         <p>Що лікар лікує</p>
-        <span *ngFor="let trend of profile?.trends">
+        <span *ngFor="let trend of profile?.selectedTrends">
             <a href="">{{trend?.name}}</a><br/>
           </span>
       </div>
@@ -84,7 +88,7 @@
           <div class="row">
             <div class="col-md-12">
               <label>Біографія</label><br/>
-              <p>{{profile?.description}}</p>
+              <p style="word-break: break-word;">{{profile?.description}}</p>
             </div>
           </div>
         </div>
@@ -114,10 +118,17 @@
             </div>
           </div>
         </div>
+        <div class="tab-pane fade" id="carts" role="tabpanel" aria-labelledby="carts-tab">
+          <div class="row">
+            <div class="col-md-12">
+              <button class="btn btn-success">Добавити картку</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div *ngIf="editing"  class="col-md-8">
-      <app-edit-user [profile]="profile" [user]="user"></app-edit-user>
+      <app-edit-user [profile]="profile" [user]="user" (cancelEvent)="cancel()" (updatedEvent)="updated($event)"></app-edit-user>
     </div>
     </div>
 </div>

@@ -1,6 +1,8 @@
 import {Role} from "./Role";
+import {Profile} from "./Profile";
 
 export class User {
+  id?: string;
   name: string;
   avatar: string;
   password: string;
@@ -9,4 +11,6 @@ export class User {
   email: string;
   role?: Role;
   roles?: Role[];
+  profile?: Profile;
+  token?: any;
 }
